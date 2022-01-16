@@ -14,6 +14,9 @@ urlpatterns = [
     path('single_scan/', views.single_scan, name= "single_scan"),
     path('alert_list/', views.alert_list, name= "alert_list"),
     path('get_reasons/', views.get_reasons, name= "get_reasons"),
+    path('client_managment/', views.client_managment, name= "client_managment"), 
+    path('scan_polcies/', views.scan_polcies, name= "scan_polcies"),
+    path('download_file/', views.download_file, name= "download_file"),
     path('main_dashboard/', views.main_dashboard, name= "main_dashboard"),
     path('main_dashboard_entity/', views.main_dashboard_entity, name= "main_dashboard_entity"),
         

@@ -21,8 +21,8 @@ SECRET_KEY = "6nqEs_dB=!^-`p2j8YKj-}xW-)r'8.HF:\T"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # if you are trying to debug uncomment the statment bellow
-DEBUG = bool(int(os.environ.get('DEBUG', 0)))
-
+# DEBUG = bool(int(os.environ.get('DEBUG', 0)))
+DEBUG = config('DEBUG', default=True, cast=bool)
 
 # load production server from .env
 ALLOWED_HOSTS = ['*']
@@ -103,19 +103,19 @@ DATABASES = {
     # }
 
     # if you are running Sqlite instance 
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME'  : 'db.sqlite3',
-    }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME'  : 'db.sqlite3',
+    # }
 
     ## if you are running Postgres instance 
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql',
-    #     'HOST': os.environ.get('DB_HOST'),
-    #     'NAME': os.environ.get('DB_NAME'),
-    #     'USER': os.environ.get('DB_USER'),
-    #     'PASSWORD': os.environ.get('DB_PASS'),
-    # }
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'HOST': os.environ.get('DB_HOST'),
+        'NAME': os.environ.get('DB_NAME'),
+        'USER': os.environ.get('DB_USER'),
+        'PASSWORD': os.environ.get('DB_PASS'),
+    }
 }
 
 
