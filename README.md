@@ -22,8 +22,8 @@ The idea is to use loki scanner as the base for all scanning activities, and to 
 
     sudo apt update
     sudo apt install docker-compose
-    git clone https://github.com/NumLocK15/yarastation/
-    cd yaratation/
+    git clone https://github.com/NumLocK15/yara-station/
+    cd yara-station/
     sudo docker-compose -f docker-compose-deploy.yml up -d
     
 That is it :) .. Now you can access the portal on http://localhost
@@ -41,6 +41,8 @@ That is it :) .. Now you can access the portal on http://localhost
     source env/bin/activate
     pip3 install -r requirements.txt
     
+    # #### Adding a secret key ####
+    # in the setting.py file, change the secret key value to any string you like.. 
     #
     # #### intialize databse ####
     # IMPORTANT!!! First: change the database setting in the core/setting.py file by uncommenting SqLite section
