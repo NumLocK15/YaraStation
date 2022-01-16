@@ -86,7 +86,7 @@ TEMPLATES = [
 ]
 
 # if you are running a stand alone instance comment out the WSGI_Application attribute
-# WSGI_APPLICATION = 'core.wsgi.application'
+WSGI_APPLICATION = 'core.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
