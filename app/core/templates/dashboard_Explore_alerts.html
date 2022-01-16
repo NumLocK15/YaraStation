@@ -1,0 +1,359 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Dashboard Analytics {% endblock %} 
+
+{% block stylesheets %}
+
+<!-- Specific CSS goes HERE -->
+<!-- data tables css -->
+<link rel="stylesheet" href="/static/assets/plugins/data-tables/css/datatables.min.css">
+
+{% endblock stylesheets %}
+
+
+{% block content %}
+
+<!-- [ Main Content ] start -->
+    <div class="pcoded-main-container">
+        <div class="pcoded-wrapper">
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <!-- [ breadcrumb ] start -->
+                    <div class="page-header">
+                        <div class="page-block">
+                            <div class="row align-items-center">
+                                <div class="col-md-2">
+                                    <div class="page-header-title">
+                                        <h5 >Alert Exploration</h5>
+                                    </div>
+                                    <ul class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
+                                        <li class="breadcrumb-item"><a href="#!">Scan List</a></li>
+                                    </ul>
+                                </div>
+
+                                <div class="col-md-10" style="float: right;">
+
+                                    <form action="{% url 'alert_list'%}" method="POST" > {% csrf_token %} 
+                                        <div class="form-group col-md-2" style="float: right;">
+                                            <label for="inputState" style="text-align:right">Number of records</label>
+                                            <select name="idForm1"  id="inputState" class="form-control">
+                                                <option value="250">250 Records</option>
+                                                <option value="500">500 Records</option>
+                                                <option value="1000">1000 Records</option>
+                                                <option value="2000">2000 Records</option>
+                                                <option value="5000">5000 Records</option>
+                                                <option value="1">All Recrods</option>
+                                            </select> 
+                                        </div>
+
+                                        <div class="form-group col-md-2" style="float: right;">
+                                            <label for="inputState" style="text-align:right">Entity Name:</label>
+                                            <select name="entites" id="entites" class="js-example-placeholder-multiple form-control col-sm-12" >
+                                                <option value="all-entitiesx15" > All Entities </option> 
+                                                {% for entity in entities %}
+                                                    <option value="{{ entity.entity_name }}" > {{ entity.entity_name }} </option> 
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group col-md-2" style="float: right;">
+                                            <label for="inputState" style="text-align:right">Type:</label>
+                                            <select name="typefilter"  id="typefilter" class="form-control">
+                                                <option value="-1">All</option>
+                                                <option value="Alert">Alert</option>
+                                                <option value="Warning">Warning</option>
+                                            </select> 
+                                        </div>
+
+                                        <div class="form-group col-md-2" style="float: right;">
+                                            <label for="inputState" style="text-align:right">Status:</label>
+                                            <select name="statusfilter"  id="statusfilter" class="form-control">
+                                                <option value="-1">All</option>
+                                                <option>Pending</option>
+                                                <option>Compromised</option>
+                                                <option>Scanning issue</option>
+                                                <option>Clean</option>
+                                                <option>inconlusive</option>
+                                            </select> 
+                                        </div>
+                                        
+                                        <div class="form-group col-md-2" style="float: right; color: gray;">
+                                            <label for="inputState" style="text-align:right">. </label>
+                                            <button type="submit" class="form-control" class="btn btn-primary">Search</button>
+                                        </div>
+                                        
+                                    </form>
+                                
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label for="inputState" class = "badge badge-pill badge-light" style="float: right; margin-right:1%">Current Filters   </label>
+                                    {% if limit != -1 %}
+                                        <a class = "badge badge-pill badge-warning" style="color:rgb(255, 253, 253); float: right; margin-right:1%">{{limit}}</a>
+                                    {% else %}
+                                        <a class = "badge badge-pill badge-warning" style="color:rgb(255, 253, 253); float: right; margin-right:1%">All-Time</a>
+                                    {% endif %}
+                                    {% if entity_filter != -1 %}
+                                        <a class = "badge badge-pill badge-warning" style="color:rgb(255, 253, 253); float: right; margin-right:1%" >{{entity_filter}}</a> 
+                                    {% endif %}
+                                    {% if search_type != -1 %}
+                                        <a class = "badge badge-pill badge-warning" style="color:rgb(255, 253, 253); float: right; margin-right:1%">{{search_type}}</a> 
+                                    {% endif %}
+                                    {% if filter_status != -1 %}
+                                        <a class = "badge badge-pill badge-warning" style="color:rgb(255, 253, 253); float: right; margin-right:1%">{{filter_status}}</a> 
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- [ breadcrumb ] end -->
+                    <div class="main-body">
+                        <div class="page-wrapper">
+
+                            <!-- [ Top headings (Scann information) ] start -->
+                            <div class="row">
+                                
+                                <!-- [ total-order ] start -->
+                                <div class="col-xl-4 col-md-12">
+                                    <div class="card">
+                                        <div class="card-block">
+                                            <div class="row align-items-center justify-content-center">
+                                                <div class="col">
+                                                    <h3 class="text-c-green">{{results}}</h3>
+                                                    <h5>Total Number of Alerts</h5>
+                                                </div>
+                                                <div class="col text-right">
+                                                    <img src="/static/assets/images/widget/shape3.png" style="width:80px;" alt="activity-user">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-md-6">
+                                    <div class="card">
+                                        <div class="card-block">
+                                            <div class="row align-items-center justify-content-center">
+                                                <div class="col">
+                                                    <h3 class="text-c-green">{{processed}}</h3>
+                                                    <h5>Processed Alerts</h5>
+                                                </div>
+                                                <div class="col text-right">
+                                                    <img src="/static/assets/images/widget/shape1.png" style="width:80px;" alt="activity-user">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-md-6">
+                                    <div class="card">
+                                        <div class="card-block">
+                                            <div class="row align-items-center justify-content-center">
+                                                <div class="col">
+                                                    <h3 class="text-c-red">{{unprocessed}}</h3>
+                                                    <h5>Unproccessed Alerts</h5>
+                                                </div>
+                                                <div class="col text-right">
+                                                    <img src="/static/assets/images/widget/shape2.png" style="width:80px;" alt="activity-user">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- [ total-order ] end -->
+
+                            </div>
+                            <!-- [ Top headings (Scanne information)  ] end -->
+
+                            <!-- [ Trigger table and reasons ] start -->
+                            <div class="col-sm-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>File scan List</h5>
+                                    </div>
+                                    <div class="card-block">
+
+                                        <form action="{% url 'alert_list'%}" method="POST" id="id_submite_status"> {% csrf_token %}
+
+                                            <div class="row">
+                                                <div class="form-group col-md-12" style="float: right">
+                                                    <button type="submit" class="btn btn-primary" name="update_status_alert" value='0' >Update Status</button>
+                                                    <label class="col-form-label">Select All: </label>
+
+                                                    <input type="checkbox" name="check_all" value="-1" onchange="select_all(this)"/> 
+                                                    <select class="form-control" id="new-status" name="new-status" required=required>
+                                                        <option></option>
+                                                        <option>Pending</option>
+                                                        <option>Compromised</option>
+                                                        <option>Scanning issue</option>
+                                                        <option>Clean</option>
+                                                        <option>inconlusive</option>
+                                                    </select>
+                                                </div>
+                                            </div>     
+                                            
+                                            <div class="row">
+                                                <!-- [ [ Trigger  table ]  start -->
+                                                <div class="col-xl-12">
+                                                    <hr>
+                                                    <table id="col-reorder" class="display table nowrap table-striped table-hover"  style="width:100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>check</th>
+                                                                <th>reason#</th>
+                                                                <th>scan#</th>
+                                                                <th>file_scan#</th>
+                                                                <th>upload date</th>
+                                                                <th>scan date</th>
+                                                                <th>entity</th>
+                                                                <th>host Name</th>
+                                                                <th>drive</th>
+                                                                <th>type</th>
+                                                                <th>score</th>
+                                                                <th>sub Score</th>
+                                                                <th>hash</th>
+                                                                <th>status</th> 
+                                                                <th>file Name</th>
+                                                                <th>reason</th>
+                                                                <th>description</th>
+                                                                <th>string 1</th>
+                                                                <th>string 2</th>
+                                                                <th>string 3</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {% for trigger in Alerts %}
+
+                                                            <tr>
+                                                                <td>
+                                                                    <input type="checkbox" class="form-control" name="trigger_check" value="{{trigger.realted_trigger_id}}">
+                                                                    <input type="text" hidden name="scan_ids" value="{{trigger.realted_trigger.related_scan_id}}">
+                                                                </td>
+                                                                <td>{{ trigger.id }}</td>
+                                                                <td>{{trigger.realted_trigger.related_scan_id}}</td>
+                                                                <td>{{trigger.realted_trigger_id}}</td>
+                                                                <td>{{trigger.realted_trigger.related_scan.upload_date}}</td>
+                                                                <td>{{trigger.realted_trigger.related_scan.scan_date}}</td>
+                                                                <td>{{trigger.realted_trigger.related_scan.entity_name_id }}</td>
+                                                                <td>{{trigger.realted_trigger.related_scan.host_name }}</td>
+                                                                <td>{{trigger.realted_trigger.related_scan.drive_name }}</td>
+
+                                                                <td>{% if trigger.realted_trigger.trigger_type == 'Warning' %} <a class = "badge badge-pill badge-warning " style="color:rgb(255, 253, 253)">Warning</a> 
+                                                                    {% elif trigger.realted_trigger.trigger_type == 'Alert' %} <a class = "badge badge-pill badge-danger " style="color:rgb(255, 253, 253)">Alert</a>  
+                                                                    {% else %}  <a class = "badge badge-pill badge-success " style="color:rgb(255, 253, 253)">info</a>  {% endif %} </td>
+                                                                
+                                                                <td>{{ trigger.realted_trigger.score }}</td>
+                                                                <td>{{ trigger.sub_score }}</td>
+                                                                
+                                                                <td><a class = "badge badge-pill badge-light " data-toggle="modal" data-target="#exampleModalCenter-{{ trigger.id }}">show</a></td>
+
+                                                                <td>{% if trigger.realted_trigger.incident_status == 'Pending' %} <a class = "badge badge-pill badge-warning " style="color:rgb(255, 253, 253)">Pending</a> 
+                                                                    {% elif trigger.realted_trigger.incident_status == 'Compromised' %} <a class = "badge badge-pill badge-danger" style="color:rgb(255, 253, 253)">Compromised</a>
+                                                                    {% elif trigger.realted_trigger.incident_status == 'Scanning issue' %} <a class = "badge badge-pill badge-secondary" style="color:rgb(255, 253, 253)">Scanning issue</a>  
+                                                                    {% elif trigger.realted_trigger.incident_status == 'inconlusive' %} <a class = "badge badge-pill badge-info" style="color:rgb(255, 253, 253)">inconlusive</a>  
+
+                                                                    {% else %}  <a class = "badge badge-pill badge-success" style="color:rgb(255, 253, 253)">Clean</a>  {% endif %} </td>
+                                                                <td>{{ trigger.realted_trigger.file_name }}</td>
+
+                                                                <td>{{ trigger.reason}}</td>
+                                                                <td>{{ trigger.descreption}}</td>
+                                                                <td>{{ trigger.string_1}}</td>
+                                                                <td>{{ trigger.string_2}}</td>
+                                                                <td>{{ trigger.string_3}}</td>
+                                                            </tr>
+
+                                                            <!--  showing the Hashs -->
+                                                            <div id="exampleModalCenter-{{ trigger.id }}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                                                <div class="modal-dialog" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalCenterTitle">Trigger Hashes</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <p> Md5 : {{trigger.realted_trigger.md5}}  </p>
+                                                                            <p> sha1 : {{ trigger.realted_trigger.sha1 }}  </p>
+                                                                            <p >sha256 : {{ trigger.realted_trigger.sha256 }}  </p>     
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!--  End showing the Hashs -->  
+                                                            {% endfor %}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <!-- [ [ Trigger  table ]  ends -->
+                            
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- [ Trigger table and reasons ]  end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- [ Main Content ] end -->
+
+{% endblock content %}
+
+{% block javascripts %}
+
+    <!-- amchart js -->
+    <script src="/static/assets/plugins/amchart/js/amcharts.js"></script>
+    <script src="/static/assets/plugins/amchart/js/gauge.js"></script>
+    <script src="/static/assets/plugins/amchart/js/serial.js"></script>
+    <script src="/static/assets/plugins/amchart/js/light.js"></script>
+    <script src="/static/assets/plugins/amchart/js/pie.min.js"></script>
+    <script src="/static/assets/plugins/amchart/js/ammap.min.js"></script>
+    <script src="/static/assets/plugins/amchart/js/usaLow.js"></script>
+    <script src="/static/assets/plugins/amchart/js/radar.js"></script>
+    <script src="/static/assets/plugins/amchart/js/worldLow.js"></script>
+
+    <!-- Float Chart js -->
+    <script src="/static/assets/plugins/flot/js/jquery.flot.js"></script>
+    <script src="/static/assets/plugins/flot/js/jquery.flot.categories.js"></script>
+    <script src="/static/assets/plugins/flot/js/curvedLines.js"></script>
+    <script src="/static/assets/plugins/flot/js/jquery.flot.tooltip.min.js"></script>
+
+    <!-- dashboard-custom js -->
+    <script src="/static/assets/js/pages/dashboard-analytics.js"></script>
+
+
+    <!-- WaterBall js -->
+    <script src="/static/assets/plugins/waterball/js/createWaterBall-jquery.js"></script>
+
+    <!-- chart js -->
+    <script src="/static/assets/js/pages/chart.js"></script>
+
+    <!-- datatable Js -->
+    <script src="/static/assets/plugins/data-tables/js/datatables.min.js"></script>
+    <script src="/static/assets/js/pages/tbl-datatable-custom.js"></script>
+
+    <script type="text/javascript">  
+        function select_all(elem){  
+            if (elem.checked == true){
+                var ele=document.getElementsByName('trigger_check');  
+                for(var i=0; i<ele.length; i++){  
+                    if(ele[i].type=='checkbox')  
+                        ele[i].checked=true;  
+                } 
+
+            }else{
+                var ele=document.getElementsByName('trigger_check');  
+                for(var i=0; i<ele.length; i++){  
+                    if(ele[i].type=='checkbox')  
+                        ele[i].checked=false;  
+                } 
+
+            }  
+        }      
+    </script> 
+
+{% endblock javascripts %}

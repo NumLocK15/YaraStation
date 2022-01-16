@@ -1,0 +1,15 @@
+.dropzone{
+    min-height:150px;
+    border:1px solid #f1f1f1;
+    background:#f4f7fa;
+    padding: 20px;
+    box-shadow: none;
+}
+.dropzone.dz-clickable .dz-message{
+    cursor:pointer;
+    text-align:center;
+    margin: 4em 0;
+}
+.dz-message span{
+    font-size: 18px;
+}

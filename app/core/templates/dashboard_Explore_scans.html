@@ -1,0 +1,236 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Dashboard Analytics {% endblock %} 
+
+{% block stylesheets %}
+
+<!-- Specific CSS goes HERE -->
+<!-- data tables css -->
+<link rel="stylesheet" href="/static/assets/plugins/data-tables/css/datatables.min.css">
+
+{% endblock stylesheets %}
+
+
+{% block content %}
+
+<!-- [ Main Content ] start -->
+    <div class="pcoded-main-container">
+        <div class="pcoded-wrapper">
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <!-- [ breadcrumb ] start -->
+                    <div class="page-header">
+                        <div class="page-block">
+                            <div class="row align-items-center">
+                                <div class="col-md-12">
+                                    <div class="page-header-title">
+                                        <h5 class="m-b-10">Scan Exploration</h5>
+                                    </div>
+                                    <ul class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
+                                        <li class="breadcrumb-item"><a href="#!">Scan List</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- [ breadcrumb ] end -->
+                    <div class="main-body">
+                        <div class="page-wrapper">
+
+                            <!-- [ Top headings (Scann information) ] start -->
+                            <div class="row">
+                                
+                                <!-- [ total-order ] start -->
+                                <div class="col-xl-4 col-md-12">
+                                    <div class="card">
+                                        <div class="card-block">
+                                            <div class="row align-items-center justify-content-center">
+                                                <div class="col">
+                                                    <h3 class="text-c-green">{{results}}</h3>
+                                                    <h5>Total Number of scans</h5>
+                                                </div>
+                                                <div class="col text-right">
+                                                    <img src="/static/assets/images/widget/shape3.png" style="width:80px;" alt="activity-user">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-md-6">
+                                    <div class="card">
+                                        <div class="card-block">
+                                            <div class="row align-items-center justify-content-center">
+                                                <div class="col">
+                                                    <h3 class="text-c-green">{{processed}}</h3>
+                                                    <h5>Processed Scans</h5>
+                                                </div>
+                                                <div class="col text-right">
+                                                    <img src="/static/assets/images/widget/shape1.png" style="width:80px;" alt="activity-user">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-md-6">
+                                    <div class="card">
+                                        <div class="card-block">
+                                            <div class="row align-items-center justify-content-center">
+                                                <div class="col">
+                                                    <h3 class="text-c-red">{{unprocessed}}</h3>
+                                                    <h5>Unproccessed Scans</h5>
+                                                </div>
+                                                <div class="col text-right">
+                                                    <img src="/static/assets/images/widget/shape2.png" style="width:80px;" alt="activity-user">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- [ total-order ] end -->
+
+                            </div>
+                            <!-- [ Top headings (Scanne information)  ] end -->
+
+                            <!-- [ Columns Reorder ] start -->
+                            <div class="col-sm-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>Scan List</h5>
+                                    </div>
+                                    <div class="card-block">
+                                        <div class="table-responsive">
+                                            <table id="col-reorder" class="display table nowrap table-striped table-hover" style="width:100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th>id#</th>
+                                                        <th>upload date</th>
+                                                        <th>scan date</th>
+                                                        <th>Entity Name</th>
+                                                        <th>Host Name</th>
+                                                        <th>Alerts</th>
+                                                        <th>warning</th>
+                                                        <th>notice</th>
+                                                        <th>proccessed by</th>
+                                                        <th>added by</th>
+                                                        <th>explore</th>
+                                                        <th>edit</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                    {% for scan in Scans %}
+                                                        <tr>
+                                                            <td>{{ scan.id }}</td>
+                                                            <td>{{ scan.upload_date }}</td>
+                                                            <td>{{ scan.scan_date }}</td>
+                                                            <td>{{ scan.entity_name_id }}</td>
+                                                            <td>{{ scan.host_name }}</td>
+                                                            <td>{{ scan.number_of_alerts }}</td>
+                                                            <td>{{ scan.number_of_warning }}</td>
+                                                            <td>{{ scan.number_of_notices }}</td>
+                                                            <td>{{ scan.processed_by }}</td>
+                                                            <td>{{ scan.added_by }}</td>
+                                                            <form action="{% url 'single_scan'%}" method="POST"> {% csrf_token %} 
+
+                                                                <td><button class = "badge badge-pill badge-success md-trigger md-setperspective" 
+                                                                    style="color:rgb(255, 255, 255)" type="submit"
+                                                                    name="scan_id" value='{{ scan.id }}'>Explore</button></td>
+
+                                                            </form>
+                                                            <td><a class=" badge badge-info md-trigger md-setperspective" style="color:rgb(255, 255, 255) " 
+                                                                data-toggle="modal" data-target="#exampleModal-{{ scan.id }}">Edit</a></td>
+                                                        </tr>
+
+                                                         <!--  enable Editing-->
+                                                         <div class="modal fade" id="exampleModal-{{ scan.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">Edit status</h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                                    </div>
+                                                                    <form action="{% url 'scan_list'%}" method="POST" id="id_submite_status"> {% csrf_token %}
+                                                                        <div class="modal-body">
+                                                                                <div class="form-group">
+                                                                                    <label for="recipient-name" class="col-form-label">Result Status:</label>
+                                                                                    <select class="form-control" id="new-status" name="new-status" required=required>
+                                                                                        <option></option>
+                                                                                        <option>Pending</option>
+                                                                                        <option>Compromised</option>
+                                                                                        <option>Scanning issue</option>
+                                                                                        <option>Clean</option>
+                                                                                        <option>inconlusive</option>    
+                                                                                    </select>
+                                                                                    <br>
+                                                                                    <label for="">Replace status for all alerts?</label>
+                                                                                    <input type="checkbox"  name="check_all_alerts"> <br>
+                                                                                    <labe style="color: chocolate;" ><i>if you want to change only the pending alerts please leave the box unchecked</i></label>
+                                                                                </div>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                            <button type="submit" class="btn btn-primary" name="scan_update_status" value='{{ scan.id }}' >Submit update</button>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        <!--  Endenable Editing-->
+
+                                                    {% endfor %}
+
+                                                </tbody>
+                                                
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- [ Columns Reorder ] end -->
+                            </div>
+                            <!-- [ Main Content ] end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- [ Main Content ] end -->
+
+{% endblock content %}
+
+{% block javascripts %}
+
+    <!-- amchart js -->
+    <script src="/static/assets/plugins/amchart/js/amcharts.js"></script>
+    <script src="/static/assets/plugins/amchart/js/gauge.js"></script>
+    <script src="/static/assets/plugins/amchart/js/serial.js"></script>
+    <script src="/static/assets/plugins/amchart/js/light.js"></script>
+    <script src="/static/assets/plugins/amchart/js/pie.min.js"></script>
+    <script src="/static/assets/plugins/amchart/js/ammap.min.js"></script>
+    <script src="/static/assets/plugins/amchart/js/usaLow.js"></script>
+    <script src="/static/assets/plugins/amchart/js/radar.js"></script>
+    <script src="/static/assets/plugins/amchart/js/worldLow.js"></script>
+
+    <!-- Float Chart js -->
+    <script src="/static/assets/plugins/flot/js/jquery.flot.js"></script>
+    <script src="/static/assets/plugins/flot/js/jquery.flot.categories.js"></script>
+    <script src="/static/assets/plugins/flot/js/curvedLines.js"></script>
+    <script src="/static/assets/plugins/flot/js/jquery.flot.tooltip.min.js"></script>
+
+    <!-- dashboard-custom js -->
+    <script src="/static/assets/js/pages/dashboard-analytics.js"></script>
+
+
+    <!-- WaterBall js -->
+    <script src="/static/assets/plugins/waterball/js/createWaterBall-jquery.js"></script>
+
+    <!-- chart js -->
+    <script src="/static/assets/js/pages/chart.js"></script>
+
+    <!-- datatable Js -->
+    <script src="/static/assets/plugins/data-tables/js/datatables.min.js"></script>
+    <script src="/static/assets/js/pages/tbl-datatable-custom.js"></script>
+
+{% endblock javascripts %}

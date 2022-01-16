@@ -1,0 +1,80 @@
+{% block stylesheets %}
+
+    <!-- modal-window-effects css -->
+    <link rel="stylesheet" href="/static/assets/plugins/modal-window-effects/css/md-modal.css">
+
+{% endblock stylesheets %}
+
+    <nav class="pcoded-navbar">
+        <div class="navbar-wrapper">
+            
+            <br>
+            
+            {% load static %} <img src='{% static "assets/images/logo-small-white3.png" %}'   class="rounded mx-auto d-block" height="77" width="200" marg alt="logo" />
+                
+            <div class="navbar-content scroll-div">
+                <ul class="nav pcoded-inner-navbar">
+                    <li class="nav-item pcoded-menu-caption">
+                        <label>Navigation</label>
+                    </li>
+                    <li data-username="Main dashboard with entity" class="nav-item pcoded-hasmenu">
+
+                            <li data-username="Main dashboard" class="nav-item"><a href="{% url 'main_dashboard' %}" class="nav-link"><span class="pcoded-micon"><i class="feather icon-tv"></i></span><span class="pcoded-mtext">Main Dashboard</span></a></li>
+                            <li data-username="Entity Dashboard" class="nav-item"><a href="{% url 'main_dashboard_entity' %}" class="nav-link"><span class="pcoded-micon"><i class="feather icon-target"></i></span><span class="pcoded-mtext">Entity Dashboard</span></a></li>
+                            <li data-username="Scan list" class="nav-item"><a href="{% url 'scan_list' %}" class="nav-link"><span class="pcoded-micon"><i class="feather icon-align-center"></i></span><span class="pcoded-mtext">Scan List</span></a></li>
+                            <li data-username="Alert list" class="nav-item"><a href="{% url 'alert_list' %}" class="nav-link"><span class="pcoded-micon"><i class="feather icon-list"></i></span><span class="pcoded-mtext">Alert List</span></a></li>
+                            <li data-username="File Upload" class="nav-item"><a href="{% url 'yara_parser:file_upload' %}" class="nav-link"><span class="pcoded-micon"><i class="feather icon-upload-cloud"></i></span><span class="pcoded-mtext">File upload</span></a></li>
+
+                    </li>
+
+
+
+                    <li class="nav-item pcoded-menu-caption">
+                        <label>Client Managment (Comming Soon)</label>
+                    </li>
+                    
+                    <li data-username="Main dashboard with entity" class="nav-item pcoded-hasmenu">
+                        <li data-username="To-Do List" class="nav-item"><a href="{% url 'client_managment' %}" class="nav-link"><span class="pcoded-micon"><i class="feather icon-server"></i></span><span class="pcoded-mtext">Client Managment (Soon)</span></a></li>
+                        <li data-username="To-Do List" class="nav-item"><a href="{% url 'scan_polcies' %}" class="nav-link"><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Scan Policies (Soon)</span></a></li>
+                    </li>
+
+                    <li class="nav-item pcoded-menu-caption">
+                        <label>App (Comming Soon)</label>
+                    </li>
+                    
+                    <li data-username="Main dashboard with entity" class="nav-item pcoded-hasmenu">
+                        <li data-username="To-Do List (Coming Soon)" class="nav-item"><a href="#" class="nav-link"><span class="pcoded-micon"><i class="feather icon-check-square"></i></span><span class="pcoded-mtext">To-do (Coming Soon)</span></a></li>
+                    </li>
+                    <li class="nav-item pcoded-menu-caption">
+                        <label>Support</label>
+                    </li>
+                    <li data-username="Need Support" class="nav-item">
+                        <a target="_blank" data-toggle="modal" data-target="#exampleModal">
+                            <span class="pcoded-micon"><i class="feather icon-help-circle"></i></span><span class="pcoded-mtext md-trigger" data-modal="modal-12" >Get Support</span></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="md-modal md-effect-12" id="modal-12">
+        <div class="md-content">
+            <h3 class="theme-bg2">Developed By NumLocK15</h3>
+            <div>
+                <p>For support please visit the Github Page:</p>
+                <ul>
+                    <li><strong>Github</strong> @NumLocK15</li>
+                </ul>
+                <button class="btn btn-primary md-close">Close me!</button>
+            </div>
+        </div>
+    </div>
+    <div class="md-overlay"></div>
+
+{% block javascripts %}
+
+    <!-- modal-window-effects Js -->
+    <script src="/static/assets/plugins/modal-window-effects/js/classie.js"></script>
+    <script src="/static/assets/plugins/modal-window-effects/js/modalEffects.js"></script>
+    
+
+{% endblock javascripts %}

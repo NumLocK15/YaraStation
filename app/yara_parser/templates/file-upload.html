@@ -1,0 +1,182 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} File Upload {% endblock %} 
+
+{% block stylesheets %}
+    {% load static %}
+    <!-- fileupload-custom css -->
+    <link rel="stylesheet" href="{% static 'assets/css/pages/fileupload.css' %} ">
+
+    <link rel="stylesheet" href="{% static 'assets/plugins/modal-window-effects/css/md-modal.css' %}">
+
+     <!-- select2 css -->
+     <link rel="stylesheet" href="{% static 'assets/plugins/select2/css/select2.min.css' %}">
+     <!-- multi-select css -->
+     <link rel="stylesheet" href="{% static 'assets/plugins/multi-select/css/multi-select.css' %} ">
+     
+
+{% endblock stylesheets %}
+
+{% block content %}
+
+
+
+    <!-- [ Main Content ] start -->
+    <section class="pcoded-main-container">
+        <div class="pcoded-wrapper">
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <!-- [ breadcrumb ] start -->
+                    <div class="page-header">
+                        <div class="page-block">
+                            <div class="row align-items-center">
+                                <div class="col-md-12">
+                                    <div class="page-header-title">
+                                        <h5 class="m-b-10">File Upload</h5>
+                                    </div>
+                                    <ul class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
+                                        <li class="breadcrumb-item"><a href="#!">File Upload</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- [ breadcrumb ] end -->
+                    <div class="main-body">
+                        <div class="page-wrapper">
+                            <!-- [ Main Content ] start -->
+                            <div class="row">
+                                <!-- [ file-upload ] start -->
+                                <div class="col-sm-12">
+                                    <div class="card">
+                                        
+                                        <div class="card-header">
+                                            <h5>File Upload</h5>
+                                        </div>
+
+                                        <div id="content-wrapper" class="d-flex flex-column">
+                                            {% for message in messages %}
+                                                <div class="alert alert-{{ message.tags }} m-2" id="msg" role="alert"> {{message}}</div>
+                                            {% endfor %}
+                                        </div>
+
+                                        <div class="card-block">
+                                            <form action="{% url 'yara_parser:submit_upload' %}" method="POST" enctype="multipart/form-data" onsubmit="toggleupload()"> {% csrf_token %}
+                                                <div class="col-xl-4 col-md-6 mb-5">
+                                                    <h5>Entity Name <i><sub>  ** Used to identify target groups e.g. multiple sites </sub></i></h5>
+                                                    <hr>
+                                                    <p>Select related entity from the list or <a href="#" data-toggle="modal" data-target="#exampleModal" >add new entity </a> </p>
+                                                    <select name="entites" id="entites" required="required" class="js-example-placeholder-multiple col-sm-12" >
+                                                        <option> </option>
+                                                        {% for entity in entities %}
+                                                            <option value="{{ entity.entity_name }}" > {{ entity.entity_name }} </option> 
+                                                        {% endfor %}
+                                                    </select>
+                                                    <br/>
+                                                    <br/>
+                                                    <hr>
+                                                    
+
+                                                    <input type="file" name="yara_results" id="yara_results" required="required" multiple="multiple" accept=".csv,.txt,.log" />
+                                                    <label for="files"><span>The parser only accepts (.txt .log .csv) formats</span></label>
+                                                    
+                                                </div>
+                                                
+                                                <div class="text-center m-t-20">
+                                                    <button id="submit12" type="submit" value="Click" name="upload_button" class="btn btn-primary" >Upload Results</button>
+                                                    <div id="spinner" class="spinner-border" role="status" style="visibility: hidden">
+                                                        <span  class="sr-only" >Loading...</span>
+                                                    </div>
+                                                </div> 
+                                            </form>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- [ file-upload ] end -->
+                            </div>
+                            <!-- [ Main Content ] end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- [ Main Content ] end -->
+
+
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Entity</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <form action="{% url 'yara_parser:add_entity'%}" method="POST" > {% csrf_token %} 
+                    <div class="modal-body">
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Entity Name: <i><sub> ** Used to identify target groups e.g. multiple sites </i></sub> </label>
+                                <input type="text" class="form-control" id="recipient-name" name="recipient-name" required="required">
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn notifications btn-success" data-type="success" data-from="top" data-align="right">success</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </form>   
+            </div>
+        </div>
+    </div>
+
+
+{% endblock content %}
+
+{% block javascripts %}
+
+    {% load static %}
+    <!-- file-upload Js -->
+    <script src="{% static 'assets/plugins/fileupload/js/dropzone-amd-module.min.js' %}"></script>
+
+    <!-- modal-window-effects Js -->
+    <script src="{% static 'assets/plugins/modal-window-effects/js/classie.js' %}"></script>
+    <script src="{% static 'assets/plugins/modal-window-effects/js/modalEffects.js' %} "></script>
+
+    <!-- select2 Js -->
+    <script src="{% static 'assets/plugins/select2/js/select2.full.min.js' %}"></script>
+
+    <!-- multi-select Js -->
+    <script src="{% static 'assets/plugins/multi-select/js/jquery.quicksearch.js' %}"></script>
+    <script src="{% static 'assets/plugins/multi-select/js/jquery.multi-select.js' %}"></script>
+
+    <!-- form-select-custom Js -->
+    <script src="{% static 'assets/js/pages/form-select-custom.js' %}"></script>
+
+    <!-- sweet alert Js -->
+    <script src="{% static 'assets/plugins/sweetalert/js/sweetalert.min.js' %}"></script>
+    <script src="{% static 'assets/js/pages/ac-alert.js' %}"></script>
+
+
+    <script type="text/javascript">
+        function toggleupload(){
+                document.getElementById('spinner').style.visibility = 'visible';
+                document.getElementById('submit12').innerText= "Loading";
+        }
+    </script>
+    <script>
+        $('#exampleModal').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            var recipient = button.data('whatever') // Extract info from data-* attributes
+            var modal = $(this)
+            modal.find('.modal-title').text('New message to ' + recipient)
+            modal.find('.modal-body input').val(recipient)
+        })
+    </script>
+
+    <!-- Notification css -->
+    <link href="/static/assets/plugins/notification/css/notification.min.css" rel="stylesheet">
+    <!-- Notification Js -->
+    <script src="/static/assets/plugins/notification/js/bootstrap-growl.min.js"></script>
+
+{% endblock javascripts %}

@@ -1,0 +1,317 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Dashboard Analytics {% endblock %} 
+
+{% block stylesheets %}
+
+<!-- Specific CSS goes HERE -->
+<!-- data tables css -->
+<link rel="stylesheet" href="/static/assets/plugins/data-tables/css/datatables.min.css">
+
+{% endblock stylesheets %}
+
+
+{% block content %}
+
+<!-- [ Main Content ] start -->
+    <div class="pcoded-main-container">
+        <div class="pcoded-wrapper">
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <!-- [ breadcrumb ] start -->
+                    <div class="page-header">
+                        <div class="page-block">
+                            <div class="row align-items-center">
+                                <div class="col-md-2">
+                                    <div class="page-header-title">
+                                        <h5 >Client Managment</h5>
+                                    </div>
+                                    <ul class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
+                                        <li class="breadcrumb-item"><a href="#!">Agent List</a></li>
+                                    </ul>
+                                </div>                                
+                            </div>
+                        </div>
+                    </div>
+                    <!-- [ breadcrumb ] end -->
+                    <div class="main-body">
+                        <div class="page-wrapper">
+
+                            <!-- [ Top headings (Scann information) ] start -->
+                            <div class="row">
+                                
+                                <!-- [ total-order ] start -->
+                                <div class="col-xl-6 col-md-12">
+                                    <div class="card">
+                                        <div class="card-block">
+                                            <div class="row align-items-center justify-content-center">
+                                                <div class="col">
+                                                    <h3 class="text-c-green">{{registered}}</h3>
+                                                    <h5>Registered Agents</h5>
+                                                </div>
+                                                <div class="col text-right">
+                                                    <img src="/static/assets/images/widget/shape3.png" style="width:80px;" alt="activity-user">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-md-6">
+                                    <div class="card">
+                                        <div class="card-block">
+                                            <div class="row align-items-center justify-content-center">
+                                                <div class="col">
+                                                    <h3 class="text-c-green">{{tasks}}</h3>
+                                                    <h5>Schedualled scans</h5>
+                                                </div>
+                                                <div class="col text-right">
+                                                    <img src="/static/assets/images/widget/shape1.png" style="width:80px;" alt="activity-user">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                                <!-- [ total-order ] end -->
+
+                            </div>
+                            <!-- [ Top headings (Scanne information)  ] end -->
+
+                            <!-- [ Client Managment ] start -->
+                            <div class="col-sm-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>Client Managment</h5>
+                                    </div>
+                                    <div class="card-block">
+
+                                        <form action="{% url 'client_managment'%}" method="POST" id="id_submite_status"> {% csrf_token %}
+
+                                            <div class="row">
+                                                <div class="form-group col-md-12" style="float: left">
+                                                    
+                                                    <div class="form-group col-md-3" style="float: left">
+                                                        <button type="submit" class="btn btn-primary" name="RunScan_button" value='0' >Run Scan</button>
+                                                        <label class="col-form-label">Select All clients: </label>
+                                                        <input type="checkbox" name="check_all" value="-1" onchange="select_all(this)"/> 
+                                                    </div>
+
+                                                    <div class="form-group col-md-9" style="float: left">
+                                                        <label>Scanning Policy</label>
+                                                        <select class="form-control" id="scanning_policy" name="scanning_policy" required=required>
+                                                            <option></option>
+                                                            {% for policy in policies %}
+                                                                <option>{{policy.name}}</option>
+                                                            {% endfor %}
+                                                        </select>
+                                                    </div>
+
+                                                </div>
+                                            </div>     
+                                            
+                                            <div class="row">
+                                                <!-- [ [ client  table ]  start -->
+                                                <div class="col-xl-12">
+                                                    <hr>
+                                                    <table id="col-reorder" class="display table nowrap table-striped table-hover"  style="width:100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>check</th>
+                                                                <th>client#</th>
+                                                                <th>status</th>
+                                                                <th>host Name</th>
+                                                                <th>ip</th>
+                                                                <th>mac</th>
+                                                                <th>os</th>
+                                                                <th>registered date</th>
+                                                                <th>last update </th>
+                                                                <th>Delete</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {% for client in clients %}
+                                                            <tr>   
+                                                                <td>
+                                                                    <input type="checkbox" class="form-control" name="client_check" value="{{client.id}}">
+                                                                </td>
+                                                                <td> {{client.id}} </td>
+                                                                <td>
+                                                                    <p id="status-{{client.id}}"></p>
+                                                                    <script>
+                                                                    
+                                                                        var stat ; 
+                                                                        // GETTING THE TIME FOR THE LAST 10 MIN //
+                                                                        var currentDate = new Date();
+                                                                        var last_ten_minutes = new Date(currentDate.getTime() - 11 *60000);
+                                                                        // END -- GETTING THE TIME FOR THE LAST 10 MIN //
+
+
+
+                                                                        // GETTING THE TIME OF LAST HEART BEAT // 
+                                                                        var date = '{{client.last_update}}'
+                                                                        var t = date.split(',');
+                                                                        var month =  t[0].split('.')[0];
+                                                                        var day = (t[0].split('.')[1]).split(' ')[1];
+                                                                        var year = t[1].split(' ')[1];
+                                                                        
+                                                                        if (t[2].split(' ')[2] == 'a.m.'){
+                                                                            var hours = (t[2].split(' ')[1]).split(':')[0]
+                                                                            var min = (t[2].split(' ')[1]).split(':')[1]
+                                                                        }else {
+                                                                            var hours = parseInt((t[2].split(' ')[1]).split(':')[0]) + 12
+                                                                            var min = (t[2].split(' ')[1]).split(':')[1]
+                                                                        }
+
+                                                                        var last_update = new Date();
+                                                                        last_update.setFullYear(year);
+                                                                        last_update.setMinutes(min);
+                                                                        last_update.setHours(hours);
+
+                                                                        function getMonthFromString(mon){
+                                                                            return new Date(Date.parse(mon +" 1, 2012")).getMonth()+1
+                                                                        }
+                                                                        // END OF GETTING THE TIME OF LAST HEART BEAT // 
+
+                                                                        // Comparing the 2 dates
+                                                                        if (last_update > last_ten_minutes){
+                                                                            stat = 1
+                                                                        } else {
+                                                                            stat = -1
+                                                                        }
+                                                                        
+
+                                                                        if (stat == 1 ){
+                                                                            document.getElementById("status-{{client.id}}").innerHTML = "<a class = 'badge badge-pill badge-success md-trigger md-setperspective' style='color:rgb(255, 253, 253)''>Active:{{client.status}}</a>";
+                                                                        }else {
+                                                                            document.getElementById("status-{{client.id}}").innerHTML = "<a class = 'badge badge-pill badge-danger md-trigger md-setperspective' style='color:rgb(255, 253, 253)''>Inactive</a>";
+                                                                        }
+                                                                    </script> 
+                                                                </td>
+                                                                <td> {{client.host_name}} </td>
+                                                                <td> {{client.ip_add}} </td>
+                                                                <td> {{client.mac_add}} </td>
+                                                                <td> {{client.os}} </td>
+                                                                <td> {{client.upload_date}} </td>
+                                                                <td> {{client.last_update}} </td>
+                                                                <td> <a href="{% url 'client_managment'%}?cl_id={{client.id}}" onclick="return confirm('Are you sure you want to delete this?')" id="remove_btn" name="remove_btn" class = 'badge badge-pill badge-danger md-trigger md-setperspective' style='color:rgb(255, 253, 253)' >Remove</a>
+                                                                </td>
+                                                            </tr> 
+                                                            {% endfor %}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <!-- [ [ client  table ]  ends -->
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        <!-- [ client Managment ]  end -->
+
+                            <!-- [ Client Managment ] start -->
+                            <div class="col-sm-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>Schedualled Scans</h5>
+                                    </div>
+                                    <div class="card-block">                                       
+                                            <div class="row">
+                                                <!-- [ [ client  table ]  start -->
+                                                <div class="col-xl-12">
+                                                    <table id="responsive-table" class="display table nowrap table-striped table-hover"  style="width:100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>id</th>
+                                                                <th>Machine</th>
+                                                                <th>MAC</th>
+                                                                <th>policy</th>
+                                                                <th>status</th>
+                                                                <th>delete</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {% for sched in schedualled %}
+                                                            <tr>   
+                                                                <td> {{sched.id}} </td>
+                                                                <td> {{sched.target_machine}} </td>
+                                                                <td> {{sched.target_mac}} </td>
+                                                                <td> {{sched.policy_name}} </td>
+                                                                <td> {{sched.status}} </td>
+                                                                <td> <a href="{% url 'client_managment'%}?sch_id={{sched.id}}" onclick="return confirm('Are you sure you want to delete this?')" id="remove_btn" name="remove_btn" class = 'badge badge-pill badge-danger md-trigger md-setperspective' style='color:rgb(255, 253, 253)' >Remove</a>
+                                                            </tr> 
+                                                            {% endfor %}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <!-- [ [ client  table ]  ends -->
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <!-- [ client Managment ]  end -->
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- [ Main Content ] end -->
+
+{% endblock content %}
+
+{% block javascripts %}
+
+    <!-- amchart js -->
+    <script src="/static/assets/plugins/amchart/js/amcharts.js"></script>
+    <script src="/static/assets/plugins/amchart/js/gauge.js"></script>
+    <script src="/static/assets/plugins/amchart/js/serial.js"></script>
+    <script src="/static/assets/plugins/amchart/js/light.js"></script>
+    <script src="/static/assets/plugins/amchart/js/pie.min.js"></script>
+    <script src="/static/assets/plugins/amchart/js/ammap.min.js"></script>
+    <script src="/static/assets/plugins/amchart/js/usaLow.js"></script>
+    <script src="/static/assets/plugins/amchart/js/radar.js"></script>
+    <script src="/static/assets/plugins/amchart/js/worldLow.js"></script>
+
+    <!-- Float Chart js -->
+    <script src="/static/assets/plugins/flot/js/jquery.flot.js"></script>
+    <script src="/static/assets/plugins/flot/js/jquery.flot.categories.js"></script>
+    <script src="/static/assets/plugins/flot/js/curvedLines.js"></script>
+    <script src="/static/assets/plugins/flot/js/jquery.flot.tooltip.min.js"></script>
+
+    <!-- dashboard-custom js -->
+    <script src="/static/assets/js/pages/dashboard-analytics.js"></script>
+
+
+    <!-- WaterBall js -->
+    <script src="/static/assets/plugins/waterball/js/createWaterBall-jquery.js"></script>
+
+    <!-- chart js -->
+    <script src="/static/assets/js/pages/chart.js"></script>
+
+    <!-- datatable Js -->
+    <script src="/static/assets/plugins/data-tables/js/datatables.min.js"></script>
+    <script src="/static/assets/js/pages/tbl-datatable-custom.js"></script>
+
+    <script type="text/javascript">  
+        function select_all(elem){  
+            if (elem.checked == true){
+                var ele=document.getElementsByName('client_check');  
+                for(var i=0; i<ele.length; i++){  
+                    if(ele[i].type=='checkbox')  
+                        ele[i].checked=true;  
+                } 
+
+            }else{
+                var ele=document.getElementsByName('client_check');  
+                for(var i=0; i<ele.length; i++){  
+                    if(ele[i].type=='checkbox')  
+                        ele[i].checked=false;  
+                } 
+
+            }  
+        }      
+    </script> 
+
+{% endblock javascripts %}

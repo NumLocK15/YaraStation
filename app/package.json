@@ -1,0 +1,21 @@
+{
+    "name": "priv-django-dashboard-dattaable-pro",
+    "mastertemplate": "boilerplate-code-flask-dashboard",
+    "version": "1.0.2",
+    "description": "Template project - Django Dashboard Boilerplate Code.",
+    "scripts": {},
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/app-generator/boilerplate-code-django-dashboard"
+    },
+    "bugs": {
+        "url": "https://github.com/app-generator/boilerplate-code-django-dashboard/issues",
+        "email": "support@appseed.us"
+    },
+    "author": "Yara station Design was developed by using Appseed App Generator <support@appseed.us> (https://appseed.us)",
+    "engines": {
+        "node": ">=10.0.0"
+    },
+    "dependencies": {},
+    "devDependencies": {}
+}

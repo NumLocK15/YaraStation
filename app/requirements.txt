@@ -1,0 +1,15 @@
+django>=2.2.24,<2.3.0
+psycopg2>=2.8.6,<2.9
+asgiref
+autopep8
+pycodestyle
+pytz
+sqlparse>=0.4.2,<0.5.0
+Unipath
+dj-database-url
+python-decouple
+gunicorn
+whitenoise
+python-dateutil
+pymysql
+uWSGI>=2.0.19.1,<2.1

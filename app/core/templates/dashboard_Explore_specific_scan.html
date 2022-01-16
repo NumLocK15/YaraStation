@@ -1,0 +1,520 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Dashboard Analytics {% endblock %} 
+
+{% block stylesheets %}
+
+<!-- Specific CSS goes HERE -->
+<!-- modal-window-effects css -->
+<link rel="stylesheet" href="/static/assets/plugins/modal-window-effects/css/md-modal.css">
+
+    
+<!-- data tables css -->
+<link rel="stylesheet" href="/static/assets/plugins/data-tables/css/datatables.min.css">
+
+
+ <!-- footable css -->
+ <link rel="stylesheet" href="/static/assets/plugins/footable/css/footable.bootstrap.min.css">
+ <link rel="stylesheet" href="/static/assets/plugins/footable/css/footable.standalone.min.css">
+
+{% endblock stylesheets %}
+
+
+{% block content %}
+
+
+<!-- [ Main Content ] start -->
+    <div class="pcoded-main-container">
+        <div class="pcoded-wrapper">
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <!-- [ breadcrumb ] start -->
+                    <div class="page-header">
+                        <div class="page-block">
+                            {% if upload_success == 1 %}
+                                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                    <strong>Success!</strong> The File has been export :)
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                </div>
+                            {% endif %}
+                            <div class="row align-items-center">
+                                
+                                <div class="col-md-6">
+                                    <div class="page-header-title">
+                                        <h5 class="m-b-10">Scan Exploration</h5>
+                                    </div>
+                                    <ul class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
+                                        <li class="breadcrumb-item"><a href="#!">Scan details</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6" >
+                                    <div class="form-group col-md-4" style="float: right;">
+                                        <form action="{% url 'single_scan'%}" method="POST"> {% csrf_token %} 
+                                            <input type="text" style="display: none;" name="scan_id" value='{{ scan.id }}'></input>
+                                            <button type="submit" name="export-btn" id="export-btn" class="form-control" value="export-btn" onclick="toggleupload()"> Export Original Results</select>
+                                        </form>
+                                    </div>
+                                    <div id="spinner" class="spinner-border" role="status" style="visibility: hidden; text-align:left"  >
+                                        <span  class="sr-only" >Loading...</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- [ breadcrumb ] end -->
+                    <div class="main-body">
+                        <div class="page-wrapper">
+                            <!-- [ Alert information ] start -->
+                            <div class="row">
+                                                                
+                                <div class="col-md-6 col-xl-4">
+                                    <div class="card table-card">
+                                        <div class="row-table">
+                                            <div class="col-auto theme-bg3 text-white p-t-50 p-b-50">
+                                                <i class="feather icon-alert-octagon f-30"></i>
+                                            </div>
+                                            <div class="col text-center">
+                                                <span class="text-uppercase d-block m-b-10"> Alerts </span>
+                                                <h3 class="f-w-300"> {{ scan.number_of_alerts }} </h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-xl-4">
+                                    <div class="card table-card">
+                                        <div class="row-table">
+                                            <div class="col-auto theme-bg2 text-white p-t-50 p-b-50">
+                                                <i class="feather icon-alert-circle f-30"></i>
+                                            </div>
+                                            <div class="col text-center">
+                                                <span class="text-uppercase d-block m-b-10">Warning </span>
+                                                <h3 class="f-w-300">{{ scan.number_of_warning }}</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-xl-4">
+                                    <div class="card table-card">
+                                        <div class="row-table">
+                                            <div class="col-auto theme-bg text-white p-t-50 p-b-50">
+                                                <i class="feather icon-alert-triangle f-30"></i>
+                                            </div>
+                                            <div class="col text-center">
+                                                <span class="text-uppercase d-block m-b-10">Notice</span>
+                                                <h3 class="f-w-300">{{ scan.number_of_notices }}</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- [ Alert information  ] end -->
+
+                            <div class="row">                           
+                                <!-- [ Scan information  ] end -->
+                                
+                                <div class="col-md-12 col-xl-6">
+                                    <div class="card">
+                                        <div class="card-block">
+                                            <div class="row align-items-left justify-content-left">
+                                                <div class="col-auto">
+                                                    <h3 class="f-w-300 m-t-20">{{ scan.entity_name_id }}<i class="fas fa-caret-up text-c-green f-26 m-l-10"></i></h3>
+                                                    <span>Scan id: {{ scan.id }}</span>
+                                                    <hr>
+                                                </div>
+
+                                            </div>
+                                            <div class="leads-progress mt-3">
+                                                <h6 class="text-muted f-w-300 mt-4">Upload Date <span class="float-right">{{ scan.upload_date }}</span></h6>
+                                                <h6 class="text-muted f-w-300 mt-4">Scan Date <span class="float-right">{{ scan.scan_date }}</span></h6>
+                                                <h6 class="text-muted f-w-300 mt-4">Uploaded by <span class="float-right">{{ scan.added_by }}</span></h6>
+                                                <h6 class="text-muted f-w-300 mt-4">Processed By <span class="float-right">{{ scan.processed_by }}</span></h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- [ Scan information  ] end -->
+
+                                <!-- [ Machine information  ] end -->
+                                <div class="col-md-12 col-xl-6">
+                                    <div class="card">
+                                        <div class="card-block">
+                                            <div class="row align-items-left justify-content-left">
+                                                <div class="col-auto">
+                                                    <h3 class="f-w-300 m-t-20">{{ scan.host_name }}<i class="fas fa-caret-up text-c-green f-26 m-l-10"></i></h3>
+                                                    <span>Host Name </span>
+                                                    <hr>
+                                                </div>
+
+                                            </div>
+                                            <div class="leads-progress mt-3">
+                                                <h6 class="text-muted f-w-300 mt-4">Drive Name <span class="float-right">{{ scan.drive_name }}</span></h6>
+                                                <h6 class="text-muted f-w-300 mt-4">Number of Yara Rules scanned <span class="float-right">{{ scan.number_of_yara_scanned }}</span></h6>
+                                                <h6 class="text-muted f-w-300 mt-4">Executed as Admin <span class="float-right">{% if scan.is_admin %} Yes {% else %} No {% endif %} </span></h6>
+                                                <h6 class="text-muted f-w-300 mt-4">Completed <span class="float-right">{% if scan.is_completed %} Yes {% else %} No {% endif %}</span></h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- [ Machine information  ] end -->
+                            </div>
+
+
+
+
+
+                            <!-- [ Trigger table and reasons ] start -->
+                            <div class="col-sm-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>File scan List</h5>
+                                    </div>
+                                    <div class="card-block">
+                                        <div class="row">
+
+                                            <!-- [ [ Trigger  table ]  start -->
+                                            <div class="col-xl-8">
+                                                <h6>File Scan</h6>
+                                                <hr>
+                                                <table id="fixed-columns-left" class="table  table-hover  nowrap" style="width:100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>id#</th>
+                                                            <th>Type</th>
+                                                            
+                                                            <th>Score</th>
+                                                            <th>Hash</th>
+                                                            <th>Reasons</th>
+                                                            <th>Status</th> 
+                                                            <th>Edit</th>
+                                                            <th>File Name</th>
+                                                            <th>Analyst Comment</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                         
+                                                        {% for trigger in triggers %}
+                                                            <tr>
+                                                                <td>{{ trigger.id }}</td>
+                                                                <td>{% if trigger.trigger_type == 'Warning' %} <a class = "badge badge-pill badge-warning " style="color:rgb(255, 253, 253)">Warning</a> 
+                                                                    {% elif trigger.trigger_type == 'Alert' %} <a class = "badge badge-pill badge-danger " style="color:rgb(255, 253, 253)">Alert</a>  
+                                                                    {% else %}  <a class = "badge badge-pill badge-success " style="color:rgb(255, 253, 253)">info</a>  {% endif %} </td>
+                                                                
+                                                                <td>{{ trigger.score }}</td>
+                                                                
+                                                                <td><a class = "badge badge-pill badge-light " data-toggle="modal" data-target="#exampleModalCenter-{{ trigger.id }}">show</a></td>
+                                                                    <td>
+                                                                        <form action="{% url 'get_reasons'%}" method="POST" id="idForm"> {% csrf_token %}  
+                                                                            <input type="text" style="display: none;" name="scan_id" value='{{ scan.id }}'></input> 
+                                                                            <button type="submit" class="badge badge-pill badge-secondary" 
+                                                                            style="color:rgb(255, 255, 255)" 
+                                                                            name="trigger_id" value='{{ trigger.id }}'>Show Reasons</button>
+                                                                        </form>
+                                                                    </td>
+                                                            
+                                                                <td>{% if trigger.incident_status == 'Pending' %} <a class = "badge badge-pill badge-warning " style="color:rgb(255, 253, 253)">Pending</a> 
+                                                                    {% elif trigger.incident_status == 'Confirmed_incident' %} <a class = "badge badge-pill badge-danger" style="color:rgb(255, 253, 253)">Confirmed_incident</a>  
+                                                                    {% else %}  <a class = "badge badge-pill badge-success" style="color:rgb(255, 253, 253)"> False_Positive</a>  {% endif %} </td>
+
+                                                                <td><a class=" badge badge-info md-trigger md-setperspective" style="color:rgb(255, 255, 255) " 
+                                                                    data-toggle="modal" data-target="#exampleModal-{{ trigger.id }}">Edit</a></td>
+
+                                                                <td>{{ trigger.file_name }}</td>
+                                                                <td>{{ trigger.analyst_comment }}</td>
+
+                                                            </tr>
+
+                                                            <!--  showing the Hashs -->
+                                                            <div id="exampleModalCenter-{{ trigger.id }}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                                                <div class="modal-dialog" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalCenterTitle">Trigger Hashes</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <p> Md5 : {{ trigger.md5 }}  </p>
+                                                                            <p> sha1 : {{ trigger.sha1 }}  </p>
+                                                                            <p >sha256 : {{ trigger.sha256 }}  </p>     
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!--  End showing the Hashs -->
+
+                                                            <!--  enable Editing-->
+                                                            <div class="modal fade" id="exampleModal-{{ trigger.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Edit status</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                                        </div>
+                                                                        <form action="{% url 'single_scan'%}" method="POST" id="id_submite_status"> {% csrf_token %}
+                                                                            <div class="modal-body">
+                                                                                    <div class="form-group">
+                                                                                        <label for="recipient-name" class="col-form-label">Status:</label>
+                                                                                        <select class="form-control" id="new-status" name="new-status">
+                                                                                            <option>Pending</option>
+                                                                                            <option>Confirmed_incident</option>
+                                                                                            <option>False_Positive</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                    <div class="form-group">
+                                                                                        <label for="message-text" class="col-form-label">Comment:</label>
+                                                                                        <textarea class="form-control" id="message-text-update" name="message-text-update" ></textarea>
+                                                                                        <input style="display:none;" name="scan_id"  value='{{ scan.id }}'/>
+                                                                                    </div>  
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                                <button type="submit" class="btn btn-primary" name="trigger-id" value='{{ trigger.id }}' >Submit update</button>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            <!--  Endenable Editing-->
+
+                                                        {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <!-- [ [ Trigger  table ]  ends -->
+
+                                            <!-- [ [ reason  table ]  start -->
+                                            <div class="col-xl-4">
+                                                <h6>Reasons</h6>
+                                                <hr>
+                                               
+                                                <table id="responsive-table" class="display table dt-responsive nowrap" style="width:100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Reason</th>
+                                                            <th>Sub Score</th>
+                                                            <th>Description</th>
+                                                            <th>String 1</th>
+                                                            <th>String 2</th>
+                                                            <th>String 3</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {% for reason in reasons %}
+                                                        <tr>                                                    
+                                                            <td>{{ reason.reason }}</td>
+                                                            <td>{{ reason.sub_score}} </td>
+                                                            <td>{{ reason.descreption }}</td>
+                                                            <td>{{ reason.string_1}}</td>
+                                                            <td>{{ reason.string_2}}</td>
+                                                            <td>{{ reason.string_3}}</td>                                                                
+                                                        </tr>
+                                                        {% endfor %}    
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <!-- [ [ reason  table ]  end -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- [ Trigger table and reasons ]  end -->
+
+
+
+                            <!-- [ Columns Reorder ] start -->
+                            <div class="col-sm-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>Proccess Scan List</h5>
+                                    </div>
+                                    <div class="card-block">
+                                        <div class="table-responsive">
+                                            <table id="col-reorder" class="display table nowrap table-hover" style="width:100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th>id#</th>
+                                                        <th>Type</th>
+                                                        <th>Proccess Name</th>
+                                                        <th>Proccess Path</th>                                                        
+                                                        <th>owner</th>
+                                                        <th>Status</th>
+                                                        <th>Edit</th>  
+                                                        <th>cmd</th>
+                                                        <th>Analyst Comment</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for proccess_scan in proccess_scans %}
+                                                        <tr>
+                                                            <td>{{ proccess_scan.id }}</td>
+                                                            <td>{% if proccess_scan.process_inf_type == 'Warning' %} <a class = "badge badge-pill badge-warning md-trigger md-setperspective" style="color:rgb(255, 253, 253)">Warning</a> 
+                                                                {% elif proccess_scan.process_inf_type == 'Alert' %} <a class = "badge badge-pill badge-danger md-trigger md-setperspective" style="color:rgb(255, 253, 253)">Alert</a>  
+                                                                {% else %}  <a class = "badge badge-pill badge-success md-trigger md-setperspective" style="color:rgb(255, 253, 253)">info</a>  {% endif %} </td>
+                                                            <td>{{ proccess_scan.process_name }}</td>
+                                                            <td>{{ proccess_scan.process_path }}</td>
+                                                            <td>{{ proccess_scan.owner }}</td>
+                                                            <td>{% if proccess_scan.incident_status == 'Pending' %} <a class = "badge badge-pill badge-warning md-trigger md-setperspective" style="color:rgb(255, 253, 253)">Pending</a> 
+                                                                {% elif proccess_scan.incident_status == 'Confirmed_incident' %} <a class = "badge badge-pill badge-danger md-trigger md-setperspective" style="color:rgb(255, 253, 253)">Confirmed_incident</a>  
+                                                                {% else %}  <a class = "badge badge-pill badge-success md-trigger md-setperspective" style="color:rgb(255, 253, 253)"> False_Positive</a>  {% endif %} </td>
+                                                                <td><a class=" badge badge-info md-trigger md-setperspective" style="color:rgb(255, 255, 255) " 
+                                                                    data-toggle="modal" data-target="#exampleModal2-{{ proccess_scan.id }}">Edit</a></td>
+                                                            <td>{{ proccess_scan.cmd }}</td>
+                                                            <td>{{ proccess_scan.analyst_comment }}</td>
+                                                        </tr>
+
+                                                        <!--  enable Editing-->
+                                                        <div class="modal fade" id="exampleModal2-{{ proccess_scan.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">Edit status</h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                                    </div>
+                                                                    <form action="{% url 'single_scan'%}" method="POST" id="id_submite_status"> {% csrf_token %}
+                                                                        <div class="modal-body">
+                                                                                <div class="form-group">
+                                                                                    <label for="recipient-name" class="col-form-label">Status:</label>
+                                                                                    <select class="form-control" id="new-status" name="new-status">
+                                                                                        <option>Pending</option>
+                                                                                        <option>Confirmed_incident</option>
+                                                                                        <option>False_Positive</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="message-text" class="col-form-label">Comment:</label>
+                                                                                    <textarea class="form-control" id="message-text-update2" name="message-text-update2" ></textarea>
+                                                                                    <input style="display:none;" name="scan_id"  value='{{ scan.id }}'/>
+                                                                                </div>  
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                            <button type="submit" class="btn btn-primary" name="trigger-id" value='{{ proccess_scan.id }}' >Submit update</button>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        <!--  Endenable Editing-->
+
+                                                    {% endfor %}
+                                                </tbody>     
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- [ Columns Reorder ] end -->
+                        
+                            </div>
+                            <!-- [ Main Content ] end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- [ Main Content ] end -->
+
+    
+    <!-- [ animated model content ] start -->
+    <div class="md-modal md-effect-18" id="modal-18">
+        <div class="md-content">
+            <h3 class="theme-bg2">Modal Dialog</h3>
+            <div>
+                <p>This is a modal window. You can do the following things with it:</p>
+                <ul>
+                    <li><strong>Read:</strong> modal windows will probably tell you something important so don't forget to read what they say.</li>
+                    <li><strong>Look:</strong> a modal window enjoys a certain kind of attention; just look at it and appreciate its presence.</li>
+                    <li><strong>Close:</strong> click on the button below to close the modal.</li>
+                </ul>
+                <button class="btn btn-primary md-close">Close me!</button>
+            </div>
+        </div>
+    </div>
+    <div class="md-overlay"></div>
+    <!-- [ animated model content ] end -->
+
+{% endblock content %}
+
+{% block javascripts %}
+
+    <!-- amchart js -->
+    <script src="/static/assets/plugins/amchart/js/amcharts.js"></script>
+    <script src="/static/assets/plugins/amchart/js/gauge.js"></script>
+    <script src="/static/assets/plugins/amchart/js/serial.js"></script>
+    <script src="/static/assets/plugins/amchart/js/light.js"></script>
+    <script src="/static/assets/plugins/amchart/js/pie.min.js"></script>
+    <script src="/static/assets/plugins/amchart/js/ammap.min.js"></script>
+    <script src="/static/assets/plugins/amchart/js/usaLow.js"></script>
+    <script src="/static/assets/plugins/amchart/js/radar.js"></script>
+    <script src="/static/assets/plugins/amchart/js/worldLow.js"></script>
+
+    <!-- WaterBall js -->
+    <script src="/static/assets/plugins/waterball/js/createWaterBall-jquery.js"></script>
+
+    <!-- Float Chart js -->
+    <script src="/static/assets/plugins/flot/js/jquery.flot.js"></script>
+    <script src="/static/assets/plugins/flot/js/jquery.flot.categories.js"></script>
+    <script src="/static/assets/plugins/flot/js/curvedLines.js"></script>
+    <script src="/static/assets/plugins/flot/js/jquery.flot.tooltip.min.js"></script>
+
+    <!-- dashboard-custom js -->
+    <script src="/static/assets/js/pages/dashboard-analytics.js"></script>
+
+    <!-- chart js -->
+    <script src="/static/assets/js/pages/chart.js"></script>
+
+    <!-- datatable Js -->
+    <script src="/static/assets/plugins/data-tables/js/datatables.min.js"></script>
+    <script src="/static/assets/js/pages/tbl-datatable-custom.js"></script>
+
+    <!-- modal-window-effects Js -->
+    <script src="/static/assets/plugins/modal-window-effects/js/classie.js"></script>
+    <script src="/static/assets/plugins/modal-window-effects/js/modalEffects.js"></script>
+
+ 
+    <!-- sweet alert Js -->
+    <script src="/static/assets/plugins/sweetalert/js/sweetalert.min.js"></script>
+    <script src="/static/assets/js/pages/ac-alert.js"></script>
+
+    <!-- footable Js -->
+    <script src="/static/assets/plugins/footable/js/footable.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            // [ Foo-table ]
+            $('#demo-foo-filtering').footable({
+                "paging": {
+                    "enabled": true
+                },
+                "sorting": {
+                    "enabled": true
+                }
+            });
+        });
+    </script>
+
+
+    <script>
+        $('#exampleModal').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            var recipient = button.data('whatever') // Extract info from data-* attributes
+            var modal = $(this)
+            modal.find('.modal-title').text('New message to ' + recipient)
+            modal.find('.modal-body input').val(recipient)
+        })
+    </script>
+
+    <script type="text/javascript">
+        function toggleupload(){
+                document.getElementById('spinner').style.visibility = 'visible';
+                document.getElementById('submit12').innerText= "Loading";
+        }
+    </script>
+
+
+{% endblock javascripts %}
