@@ -82,7 +82,7 @@ def scan_list(request):
             print("2222")
             models.file_scan.objects.filter(related_scan_id=updated_scan_id).filter(incident_status="Pending").update(incident_status=selected_status) 
 
-    return render(request, 'dashboard_Explore_scans.html', {'results' : number_of_scans , 'unprocessed' : unprocessed_scans , 'processed' : processed_scanns, 'Scans' : list(QuerySet) })
+    return render(request, 'dashboard_explore_scans.html', {'results' : number_of_scans , 'unprocessed' : unprocessed_scans , 'processed' : processed_scanns, 'Scans' : list(QuerySet) })
 
 @login_required(login_url="/login/")
 def alert_list(request):
@@ -261,7 +261,7 @@ def alert_list(request):
     #     QuerySet.filter(realted_trigger__incident_status=filter_status)
 
 
-    return render(request, 'dashboard_Explore_alerts.html', {'results' : number_of_alerts , 'unprocessed' : unprocessed_scans , 'processed' : processed_scanns, 'Alerts' : list(QuerySet), 'entities' : list(QuerySet2), 'limit' : history, 'search_type': type_search, 'entity_filter' :  search_entity, 'filter_status' :filter_status })
+    return render(request, 'dashboard_explore_alerts.html', {'results' : number_of_alerts , 'unprocessed' : unprocessed_scans , 'processed' : processed_scanns, 'Alerts' : list(QuerySet), 'entities' : list(QuerySet2), 'limit' : history, 'search_type': type_search, 'entity_filter' :  search_entity, 'filter_status' :filter_status })
 
 @login_required(login_url="/login/")
 def single_scan(request):
@@ -612,7 +612,7 @@ def main_dashboard_entity(request):
         'most_processed' : most_processed,
     }
   
-    return render(request, 'dashboard-Entity.html', context)
+    return render(request, 'dashboard-entity.html', context)
 @login_required(login_url="/login/")
 def client_managment (request):
 
