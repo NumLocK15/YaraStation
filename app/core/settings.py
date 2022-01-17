@@ -14,8 +14,8 @@ CORE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # it recomended from the django framework to change the secret key to a value with at least 50 chars
-# SECRET_KEY = os.environ.get('SECRET_KEY')
-SECRET_KEY = "6nqEs_dB=!^-`p2j8YKj-}xW-)r'8.HF:\T"
+SECRET_KEY = os.environ.get('SECRET_KEY')
+#SECRET_KEY = "6nqEs_dB=!^-`p2j8YKj-}xW-)r'8.HF:\T"
 
 
 
