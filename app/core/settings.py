@@ -18,8 +18,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # if you are trying to debug uncomment the statment bellow
-DEBUG = bool(int(os.environ.get('DEBUG', 0)))
-# DEBUG = config('DEBUG', default=True, cast=bool)
+#DEBUG = bool(int(os.environ.get('DEBUG', 0)))
+DEBUG = config('DEBUG', default=True, cast=bool)
 
 # load production server from .env
 ALLOWED_HOSTS = ['*']
