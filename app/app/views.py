@@ -687,21 +687,21 @@ def scan_polcies (request):
             files = request.FILES.getlist('uploaded_rules')
 
             for f in files: # saving all yara files.
-                open('Yara_policies/tmp/' + f.name, 'wb').write(f.read())
+                open('yara_policies/tmp/' + f.name, 'wb').write(f.read())
                 print('The file ' + f.name + ' was uploaded successfully')
 
 
             # Compressing all the files 
-            policy_path = 'Yara_policies/' + new_name + '.zip'
+            policy_path = 'yara_policies/' + new_name + '.zip'
             compressed = zipfile.ZipFile(policy_path , 'w')
-            for folder, subfolders, files in os.walk('Yara_policies/tmp/'):
+            for folder, subfolders, files in os.walk('yara_policies/tmp/'):
                 for file in files:
-                    compressed.write(os.path.join(folder, file), os.path.relpath(os.path.join(folder,file), 'Yara_policies/tmp/'), compress_type = zipfile.ZIP_DEFLATED)
+                    compressed.write(os.path.join(folder, file), os.path.relpath(os.path.join(folder,file), 'yara_policies/tmp/'), compress_type = zipfile.ZIP_DEFLATED)
 
             compressed.close()
             
             # delete all  tmp files
-            for folder, subfolders, files in os.walk('Yara_policies/tmp/'):
+            for folder, subfolders, files in os.walk('yara_policies/tmp/'):
                 for file in files:
                     os.remove(os.path.join(folder, file))
 
@@ -727,7 +727,7 @@ def scan_polcies (request):
 def download_file (request):
     if request.GET.get('policy_name'):
         filename =  str(request.GET.get('policy_name'))
-        filepath = 'Yara_policies/' + filename
+        filepath = 'yara_policies/' + filename
         print(filepath)
         return serve(request, os.path.basename(filepath),os.path.dirname(filepath))
     else:
