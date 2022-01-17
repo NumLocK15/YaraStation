@@ -44,6 +44,8 @@ That is it :) .. Now you can access the portal on http://localhost
     # #### Adding a secret key ####
     # in the setting.py file, change the secret key value to any string you like.. 
     #
+    # ### Remove Wsgi service by uncommenting the statement in the setting folder ####
+    #
     # #### intialize databse ####
     # IMPORTANT!!! First: change the database setting in the core/setting.py file by uncommenting SqLite section
     # 'default': {
