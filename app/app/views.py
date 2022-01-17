@@ -613,4 +613,124 @@ def main_dashboard_entity(request):
     }
   
     return render(request, 'dashboard-Entity.html', context)
+@login_required(login_url="/login/")
+def client_managment (request):
+
+    if (request.GET.get('cl_id')): ## case removing an agent
+        models.client.objects.filter(pk=request.GET.get('cl_id')).delete()
+        print ("<<Agent Deleted>>")
+
+    elif (request.GET.get('sch_id')): ## Case removing a schedualled job
+        models.schedualled_scan.objects.filter(pk=request.GET.get('sch_id')).delete()
+        print ("<<Job Deleted>>")
+
+    elif (request.POST.get('RunScan_button')):#case running new scan 
+        
+        checked_boxes = request.POST.getlist('client_check')
+        if checked_boxes != None:
+            for id in checked_boxes:
+                new_schedual = models.schedualled_scan ()
+                new_schedual.target_machine= models.client.objects.filter(pk=id).values_list('host_name').first()[0]
+                new_schedual.target_mac= models.client.objects.filter(pk=id).values_list('mac_add').first()[0]
+                new_schedual.policy_name= (request.POST.getlist('scanning_policy')[0])
+                new_schedual.status = 'intialized'
+                new_schedual.save()
+
+    client_list = models.client.objects.all()
+    policies = models.policy_scan.objects.all()
+    schedualled = models.schedualled_scan.objects.all()
+
+    
+    context = {
+        'tasks' : schedualled.count(),
+        'disconnected' : "3",
+        'registered' : client_list.count(),
+        'clients' : client_list,
+        'policies' :  policies,
+        'schedualled' : schedualled
+    }
+    return render(request, 'client_managment.html', context)
+
+
+@login_required(login_url="/login/")
+def scan_polcies (request):
+
+    if (request.GET.get('pol_id')): ## case removing an agent
+
+        # Deletes file from filesystem.
+        path = models.policy_scan.objects.filter(pk=request.GET.get('pol_id')).values_list('path').first()[0]
+
+        if os.path.isfile(path):
+            os.remove(path)
+            models.policy_scan.objects.filter(pk=request.GET.get('pol_id')).delete()
+            print ("<<Policy  Deleted>>")
+        else:
+            print ("<<wrong Path>>")
+
+
+
+    if request.POST.get('policy_name'): # checking if the call was from adding a policy
+
+        #check if the name exist
+        policy_all = models.policy_scan.objects.all().values_list('name', flat=True)
+        print (policy_all)
+
+        new_name = request.POST.get('policy_name').replace(" " , "_") 
+        print(new_name)
+
+        if (new_name in policy_all):
+            print ("<<policy name is used.. abort>>")
+            messages.error(request, 'Failed adding a new poilcy,  name is already used.')
+
+        else :
+            print ("<< adding policy >>")
+            files = request.FILES.getlist('uploaded_rules')
+
+            for f in files: # saving all yara files.
+                open('Yara_policies/tmp/' + f.name, 'wb').write(f.read())
+                print('The file ' + f.name + ' was uploaded successfully')
+
+
+            # Compressing all the files 
+            policy_path = 'Yara_policies/' + new_name + '.zip'
+            compressed = zipfile.ZipFile(policy_path , 'w')
+            for folder, subfolders, files in os.walk('Yara_policies/tmp/'):
+                for file in files:
+                    compressed.write(os.path.join(folder, file), os.path.relpath(os.path.join(folder,file), 'Yara_policies/tmp/'), compress_type = zipfile.ZIP_DEFLATED)
+
+            compressed.close()
+            
+            # delete all  tmp files
+            for folder, subfolders, files in os.walk('Yara_policies/tmp/'):
+                for file in files:
+                    os.remove(os.path.join(folder, file))
+
+            #Adding the database record
+            new_policy = models.policy_scan()
+            new_policy.name = new_name
+            new_policy.descreption = request.POST.get('policy_desc') 
+            new_policy.path = policy_path
+            new_policy.save()
+
+    # Statistics start #
+    policy_list = models.policy_scan.objects.all()
+    count = policy_list.count()
+    
+    context = {
+        'total' : count ,
+        'disconnected' : "3",
+        'registered' : "4",
+        'policies' : policy_list
+    }
+    return render(request, 'client_scan_polcies.html', context)
+
+def download_file (request):
+    if request.GET.get('policy_name'):
+        filename =  str(request.GET.get('policy_name'))
+        filepath = 'Yara_policies/' + filename
+        print(filepath)
+        return serve(request, os.path.basename(filepath),os.path.dirname(filepath))
+    else:
+        print("error Found .....")
+
 
