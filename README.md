@@ -78,3 +78,13 @@ The portal is still in the earlly development phases, it is recommended to run i
     1. (live) Provide support for Uploading/Parsing loki results
     2. (Coming Soon) Provide support for managment agents to run scans from a centralized location
     3. (Coming soon) Provide support for Uploading/Parsing results from different sources (e.g. Thor scanner, EDRs etc.)
+    
+    
+## Screenshots
+<p align="center">
+    <img src="app/core/static/assets/images/sc1.jpg"/>
+    <img src="app/core/static/assets/images/sc2.jpg"/>
+    <img src="app/core/static/assets/images/sc3.jpg"/>
+    <img src="app/core/static/assets/images/sc4.jpg"/>
+    <img src="app/core/static/assets/images/sc5.jpg"/>
+</p>
