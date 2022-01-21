@@ -21,7 +21,7 @@ SECRET_KEY = "6nqEs_dB=!^-`p2j8YKj-}xW-)r'8.HF:\T"
 DEBUG = config('DEBUG', default=True, cast=bool)
 
 # load production server from .env
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = ['*']
 ALLOWED_HOSTS.extend(
     filter(
         None,
