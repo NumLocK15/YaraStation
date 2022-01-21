@@ -31,7 +31,7 @@ That is it :) .. Now you can access the portal on http://localhost
 ### Run (Option 2 - Running it directly without docker) 
 
     #download the code
-    git clone https://github.com/NumLocK15/yara-station/
+    git clone https://github.com/NumLocK15/yarastation/
     cd  yara-station/app
     
     #setup the virtual environemt and download requirments
