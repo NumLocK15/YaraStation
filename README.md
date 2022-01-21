@@ -39,28 +39,12 @@ That is it :) .. Now you can access the portal on http://localhost
     sudo apt install virtualenv
     sudo virtualenv env
     source env/bin/activate
-    pip3 install -r requirements.txt
+    pip3 install -r requirements-standalone.txt 
     
-    # #### Adding a secret key ####
-    # in the setting.py file, change the secret key value to any string you like.. 
-    #
-    # ### Remove Wsgi service by uncommenting the statement in the setting folder ####
-    #
-    # #### intialize databse ####
-    # IMPORTANT!!! First: change the database setting in the core/setting.py file by uncommenting SqLite section
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME'  : 'db.sqlite3',
-    # }
-    # 
-    #
-    # Then Comment out the Postgress instance bellow it.
-    #
-    #
-    # This will tell django to create and use a new sqLite instance rather than using postgress which is not present outside docker.
-    # Note: if you have an external postgress instance or MySQl instance you can use the commented code to connect to them 
-    #
-    
+    ## Important Steps:
+    1) replace core/setting.py with core/setting-standalone.py by renaming the latter.
+    2) locate core/urls.py and remove setting.debug section
+   
     # Create tables in db
     python manage.py makemigrations
     python manage.py migrate
@@ -70,14 +54,19 @@ That is it :) .. Now you can access the portal on http://localhost
 
 That is it :) .. Now you can access the portal on http://localhost:8015
 
+Notes: 
+1) in the standalone version the app will create and run on SQLite instance rather than postgres which is used in the docker, which may cause concurrency issues. you can also link to any other existing database in your environment (read django documentioans) 
+
+
+
 ## Disclaimer
 The portal is still in the earlly development phases, it is recommended to run it in a controlled environemnt that does not have internet access. 
 
 
 ## Roadmap
     1. (live) Provide support for Uploading/Parsing loki results
-    2. (Coming Soon) Provide support for managment agents to run scans from a centralized location
-    3. (Coming soon) Provide support for Uploading/Parsing results from different sources (e.g. Thor scanner, EDRs etc.)
+    2. (Coming Soon - end of january) Provide support for managment agents to run scans from a centralized location
+    3. (Coming soon - still collecting data) Provide support for Uploading/Parsing results from different sources (e.g. Thor scanner, EDRs etc.)
     
     
 ## Screenshots
