@@ -16,7 +16,6 @@ from django import template
 from yara_parser import models 
 from django.db.models.aggregates import Count, Max , Min, Avg
 from dateutil.relativedelta import relativedelta
-from tkinter import Tk, filedialog
 import time
 import os
 import zipfile
@@ -162,104 +161,6 @@ def alert_list(request):
         QuerySet = QuerySet[:history]
     else:
         QuerySet =QuerySet[:250]
-
-    # print(QuerySet.query)
-    
-    ###### End --- Running the Query based on the filters ####### 
-    # if search_entity == -1 and type_search == -1: # Case no filter
-    #     if (history != -1):
-            
-    #         QuerySet =  models.Reasons.objects.all().select_related('realted_trigger').select_related('realted_trigger__related_scan').order_by('-id')[:history] # 250 is the default
-
-    #         # QuerySet =  models.Reasons.objects.raw(" \
-    #         # SELECT * FROM 'yara_parser_reasons' \
-    #         # INNER JOIN 'yara_parser_file_scan' ON ('yara_parser_reasons'.'realted_trigger_id' = 'yara_parser_file_scan'.'id') \
-    #         # INNER JOIN 'yara_parser_scans' ON ('yara_parser_file_scan'.'related_scan_id' = 'yara_parser_scans'.id) \
-    #         # ORDER BY 'yara_parser_reasons'.'id' DESC  LIMIT " + str(history) ) 
-
-    #     else: # Getting all records
-
-    #         QuerySet =  models.Reasons.objects.all().select_related('realted_trigger').select_related('realted_trigger__related_scan').order_by('-id')
-    #         # QuerySet =  models.Reasons.objects.raw(" \
-    #         # SELECT * FROM 'yara_parser_reasons' \
-    #         # INNER JOIN 'yara_parser_file_scan' ON ('yara_parser_reasons'.'realted_trigger_id' = 'yara_parser_file_scan'.'id') \
-    #         # INNER JOIN 'yara_parser_scans' ON ('yara_parser_file_scan'.'related_scan_id' = 'yara_parser_scans'.id) \
-    #         # ORDER BY 'yara_parser_reasons'.'id' DESC")
-
-    # elif search_entity != -1 and type_search == -1: # Case only entity
-    #     if (history != -1):
-            
-    #         QuerySet =  models.Reasons.objects.all().select_related('realted_trigger').select_related('realted_trigger__related_scan').filter(realted_trigger__related_scan__entity_name=search_entity).order_by('-id')[:history] # 250 is the default
-            
-    #         # QuerySet =  models.Reasons.objects.raw(" \
-    #         # SELECT * FROM 'yara_parser_reasons'  \
-    #         # INNER JOIN 'yara_parser_file_scan' ON ('yara_parser_reasons'.'realted_trigger_id' = 'yara_parser_file_scan'.'id') \
-    #         # INNER JOIN 'yara_parser_scans' ON ('yara_parser_file_scan'.'related_scan_id' = 'yara_parser_scans'.id) \
-    #         # where 'yara_parser_scans'.'entity_name_id' = '" + search_entity + "' \
-    #         # ORDER BY 'yara_parser_reasons'.'id' DESC  LIMIT " + str(history) )
-
-    #     else: # Getting all records
-            
-    #         QuerySet =  models.Reasons.objects.all().select_related('realted_trigger').select_related('realted_trigger__related_scan').filter(realted_trigger__related_scan__entity_name=search_entity).order_by('-id')
-
-    #         # QuerySet =  models.Reasons.objects.raw(" \
-    #         # SELECT * FROM 'yara_parser_reasons' \
-    #         # INNER JOIN 'yara_parser_file_scan' ON ('yara_parser_reasons'.'realted_trigger_id' = 'yara_parser_file_scan'.'id') \
-    #         # INNER JOIN 'yara_parser_scans' ON ('yara_parser_file_scan'.'related_scan_id' = 'yara_parser_scans'.id) \
-    #         # where 'yara_parser_scans'.'entity_name_id' = '" + search_entity + "' \
-    #         # ORDER BY 'yara_parser_reasons'.'id' DESC")
-
-    # elif search_entity == -1 and type_search != -1: # Case only Type
-    #     if (history != -1):
-    #         # QuerySet =  models.Reasons.objects.select_related('realted_trigger').order_by('-id')[:history] # 250 is the default
-    #         QuerySet =  models.Reasons.objects.all().select_related('realted_trigger').select_related('realted_trigger__related_scan').filter(realted_trigger__trigger_type=type_search).order_by('-id')[:history] # 250 is the default
-
-            
-    #         # QuerySet =  models.Reasons.objects.raw(" \
-    #         # SELECT * FROM 'yara_parser_reasons'  \
-    #         # INNER JOIN 'yara_parser_file_scan' ON ('yara_parser_reasons'.'realted_trigger_id' = 'yara_parser_file_scan'.'id') \
-    #         # INNER JOIN 'yara_parser_scans' ON ('yara_parser_file_scan'.'related_scan_id' = 'yara_parser_scans'.id) \
-    #         # where 'yara_parser_file_scan'.'trigger_type' = '" + type_search + "' \
-    #         # ORDER BY 'yara_parser_reasons'.'id' DESC  LIMIT " + str(history) )
-
-    #     else: # Getting all records
-            
-    #         QuerySet =  models.Reasons.objects.all().select_related('realted_trigger').select_related('realted_trigger__related_scan').filter(realted_trigger__trigger_type=type_search).order_by('-id')
-
-    #         # QuerySet =  models.Reasons.objects.raw(" \
-    #         # SELECT * FROM 'yara_parser_reasons'  \
-    #         # INNER JOIN 'yara_parser_file_scan' ON ('yara_parser_reasons'.'realted_trigger_id' = 'yara_parser_file_scan'.'id') \
-    #         # INNER JOIN 'yara_parser_scans' ON ('yara_parser_file_scan'.'related_scan_id' = 'yara_parser_scans'.id) \
-    #         # where 'yara_parser_file_scan'.'trigger_type' = '" + type_search + "' \
-    #         # ORDER BY 'yara_parser_reasons'.'id' DESC") 
-
-    # elif search_entity != -1 and type_search != -1: # Case Type and Entity
-    #     if (history != -1):
-    #         QuerySet =  models.Reasons.objects.all().select_related('realted_trigger').select_related('realted_trigger__related_scan').filter(realted_trigger__related_scan__entity_name=search_entity).filter(realted_trigger__trigger_type=type_search).order_by('-id')[:history] # 250 is the default
-
-    #         # QuerySet =  models.Reasons.objects.raw(" \
-    #         # SELECT * FROM 'yara_parser_reasons'  \
-    #         # INNER JOIN 'yara_parser_file_scan' ON ('yara_parser_reasons'.'realted_trigger_id' = 'yara_parser_file_scan'.'id') \
-    #         # INNER JOIN 'yara_parser_scans' ON ('yara_parser_file_scan'.'related_scan_id' = 'yara_parser_scans'.id) \
-    #         # where 'yara_parser_file_scan'.'trigger_type' = '" + type_search + "' \
-    #         # and 'yara_parser_scans'.'entity_name_id' = '" + search_entity + "' \
-    #         # ORDER BY 'yara_parser_reasons'.'id' DESC  LIMIT " + str(history) )
-
-    #     else: # Getting all records
-    #         QuerySet =  models.Reasons.objects.all().select_related('realted_trigger').select_related('realted_trigger__related_scan').filter(realted_trigger__related_scan__entity_name=search_entity).filter(realted_trigger__trigger_type=type_search).order_by('-id')
-
-    #         # QuerySet =  models.Reasons.objects.raw(" \
-    #         # SELECT * FROM 'yara_parser_reasons'  \
-    #         # INNER JOIN 'yara_parser_file_scan' ON ('yara_parser_reasons'.'realted_trigger_id' = 'yara_parser_file_scan'.'id') \
-    #         # INNER JOIN 'yara_parser_scans' ON ('yara_parser_file_scan'.'related_scan_id' = 'yara_parser_scans'.id) \
-    #         # where 'yara_parser_file_scan'.'trigger_type' = '" + type_search + "' \
-    #         # and 'yara_parser_scans'.'entity_name_id' = '" + search_entity + "' \
-    #         # ORDER BY 'yara_parser_reasons'.'id' DESC")
-
-
-    # if filter_status != -1: # checking if there is a type filter
-    #     QuerySet.filter(realted_trigger__incident_status=filter_status)
-
 
     return render(request, 'dashboard_explore_alerts.html', {'results' : number_of_alerts , 'unprocessed' : unprocessed_scans , 'processed' : processed_scanns, 'Alerts' : list(QuerySet), 'entities' : list(QuerySet2), 'limit' : history, 'search_type': type_search, 'entity_filter' :  search_entity, 'filter_status' :filter_status })
 

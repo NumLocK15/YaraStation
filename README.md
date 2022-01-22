@@ -44,7 +44,6 @@ That is it :) .. Now you can access the portal on http://localhost
     ## Important Steps:
     1) replace core/setting.py with core/setting-standalone.py by renaming the latter.
     2) locate core/urls.py and remove setting.debug section
-    3) depending on you current python3 setup, you might be required to install tkinter ((sudo apt-get install python3-tk))
    
     # Create tables in db
     python manage.py makemigrations
