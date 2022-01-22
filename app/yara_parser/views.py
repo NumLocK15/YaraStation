@@ -44,16 +44,16 @@ def submit_upload(request): # this function will cover the parsing of a newlly u
 
         for file in files:# looping through all the uploaded files.          
             if (file.name).endswith('.txt') or (file.name).endswith('.log'):
-            #    try:
+                try:
                     parse_txt (file, entity_name,scan_type, request)
-            #    except:
-            #        messages.error(request, "Parsing error... file (" +file.name + ") is not supported... The file has been saved without parsing")
+                except:
+                    messages.error(request, "Appolgies, There was an error uploading file (" +file.name + "). if the file was generated using Loki scanner please open and issue in the github page. NOTE: other tools (e.g. thor) are not supported yet ")
 
             elif (file.name).endswith('.CSV') or (file.name).endswith('.csv'):
-            #    try:
+                try:
                     parse_csv (file, entity_name,scan_type, request)
-            #    except:
-            #        messages.error(request, "Parsing error... file (" +file.name + ") is not supported... The file has been saved without parsing")
+                except:
+                    messages.error(request, "Appolgies, There was an error uploading file (" +file.name + "). if the file was generated using Loki scanner please open and issue in the github page. NOTE: other tools (e.g. thor) are not supported yet ")
         
         # finishing the function and redirecting the user to the success page..
         # Getting the Entity Names for the drop down list. 

@@ -31,12 +31,7 @@
                     <!-- [ breadcrumb ] start -->
                     <div class="page-header">
                         <div class="page-block">
-                            {% if upload_success == 1 %}
-                                <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                                    <strong>Success!</strong> The File has been export :)
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                </div>
-                            {% endif %}
+                            
                             <div class="row align-items-center">
                                 
                                 <div class="col-md-6">
@@ -55,9 +50,7 @@
                                             <button type="submit" name="export-btn" id="export-btn" class="form-control" value="export-btn" onclick="toggleupload()"> Export Original Results</select>
                                         </form>
                                     </div>
-                                    <div id="spinner" class="spinner-border" role="status" style="visibility: hidden; text-align:left"  >
-                                        <span  class="sr-only" >Loading...</span>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
