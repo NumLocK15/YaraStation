@@ -9,7 +9,8 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),          # Django admin route
-    path('yara_parser/', include('yara_parser.urls', namespace='yara_parser')),           
+    path('yara_parser/', include('yara_parser.urls', namespace='yara_parser')),       
+    path('api/', include('api.urls')),      
     path("", include("authentication.urls")), # Auth routes - login / register
     path("", include("app.urls")),             # UI Kits Html files
 ]
@@ -20,4 +21,4 @@ if settings.DEBUG:
         settings.MEDIA_URL,
         document_root=settings.MEDIA_ROOT,
     )
-#####################################################################
+##################################################################### 

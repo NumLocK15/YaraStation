@@ -615,13 +615,4 @@ def scan_polcies (request):
     }
     return render(request, 'client_scan_polcies.html', context)
 
-def download_file (request):
-    if request.GET.get('policy_name'):
-        filename =  str(request.GET.get('policy_name'))
-        filepath = 'yara_policies/' + filename
-        print(filepath)
-        return serve(request, os.path.basename(filepath),os.path.dirname(filepath))
-    else:
-        print("error Found .....")
-
 

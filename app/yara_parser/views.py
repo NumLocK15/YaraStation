@@ -8,21 +8,12 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.utils.decorators import method_decorator
-
+from rest_framework.authtoken.models import Token
 
 MESSAGE_TAGS = {
     messages.ERROR: 'danger'
 }
 
-
-# Create your views here.
-
-# def yara_parser(request):
-  
-#     # Getting the Entity Names for the drop down list. 
-#     QuerySet =  Entities.objects.all().order_by('entity_name') 
-  
-#     return render(request, 'upload.html', {'entities' : list(QuerySet)})
 
 @login_required(login_url="/login/")
 def yara_parser(request):
@@ -69,10 +60,18 @@ def submit_upload(request): # this function will cover the parsing of a newlly u
 
 def parse_txt (file, entity_name,sc_type, request): #function for parsing txt files. 
 
+    # check the source of the upload (from GUI or API)
+    if not(isinstance(file, bytes)):
+        print ("<< GUI upload >>")
+        content_bytes = file.read()
+
+    else:
+        print ("<< API upload >>")
+        content_bytes = file
+
     # intilizing the variables.
     #-----------------
     # converting the document to base64 
-    content_bytes = file.read()
     base64_bytes = base64.b64encode(content_bytes)
     base64_content = base64_bytes.decode('ascii')
 
@@ -380,6 +379,7 @@ def parse_txt (file, entity_name,sc_type, request): #function for parsing txt fi
 
  
 def parse_csv (file, entity_name,sc_type, request): #function for parsing csv files. 
+    
     # intilizing the variables.
     #-----------------
     # converting the document to base64 
@@ -676,75 +676,32 @@ def add_entity(request):
     return render(request, 'file-upload.html', {'entities' : list(QuerySet)})
 
 
-def heart_beat (request):
-    if request.POST.get('mac_add'): ## checking if there is a mac address or exit.
-        found = client.objects.filter(mac_add=request.POST.get('mac_add'))
-      
-        if found.first() == None: ## Case new client 
-            print ("<< registering new client >>")
-            try:
-                print("Mac: " + request.POST.get('mac_add'))
-                print("ip: " + request.POST.get('ip_add'))
-                print("host: " + request.POST.get('host_name'))
-                print("os: " + request.POST.get('os'))
-                print("status: " + request.POST.get('status'))
+def heart_beat (mac_add, ip_add, host_name, os, status):
 
-                new_client = client ()
-                new_client.mac_add = request.POST.get('mac_add')
-                new_client.ip_add =  request.POST.get('ip_add')
-                new_client.host_name = request.POST.get('host_name')
-                new_client.os = request.POST.get('os')
-                new_client.status = request.POST.get('status')
+    # checking if the client is old or needs registering
+    found = client.objects.filter(mac_add=mac_add)
 
-                new_client.save()
-            except:
-                print(" Failed ... ")
-                return render(request, 'basic_response_failure.html', {'test' : "testing-Sux"})
-        else:
-            print ("<< Updating exisiting client >>")
-            found.update(last_update=datetime.now())
+    if found.first() == None: ## Case new client 
+        print ("<< registering new client >>")
 
-            print("<<Checking the schedualled tasks>>")
-            schedualled_jobs =  schedualled_scan.objects.filter(status='intialized')
-            for task in schedualled_jobs:
-                if request.POST.get('mac_add') == task.target_mac:
-                    context = {
-                        'state' : "2",
-                        'policy_name' : task.policy_name,
-                        'upload_completed' : "N/A"
-                    }
-                    return render(request, 'basic_response.html', context)
-
-    else: 
-        print("nothing to do..")
-
-
-    return render(request, 'basic_response.html', {'test' : "testing-Sux"})
-
-def upload_agent_results (request):
-    if request.POST.get('entites'): ## checking if there is a mac address or exit.
-        print ("<<Starting Upload function from agent>>")
-
-        # Reading the results and parsing them into the database.
-        files = request.FILES.getlist('yara_results')
-        entity_name  = "agent_results"
-        scan_type  = request.POST.get('sc_type')
-
-        for file in files:# looping through all the uploaded files.          
-            try:
-                if (file.name).endswith('.txt') or (file.name).endswith('.log'):    
-                    parse_txt (file, entity_name,scan_type, request)
-    
-                elif (file.name).endswith('.CSV') or (file.name).endswith('.csv'):
-                    parse_csv (file, entity_name,scan_type, request)
-            except:
-                messages.error(request, "Parsing error... file (" +file.name + ") is not supported... The file has been saced without parsing")
-
-        context = {
-            'state' : "3",
-            'policy_name' : "N/A",
-            'upload_completed' : "1"
-        }
-        return render(request, 'basic_response.html', context)
+        try:
+            new_client = client ()
+            new_client.mac_add = mac_add
+            new_client.ip_add =  ip_add
+            new_client.host_name = host_name
+            new_client.os = os
+            new_client.status = status
+            new_client.save()
+        except:
+            print(" !! Failed adding new client !!")
     else:
-        print ("!!!!")
+        print ("<< Updating exisiting client >>")
+        found.update(last_update=datetime.now())
+
+        print("<<Checking the schedualled tasks>>")
+        schedualled_jobs =  schedualled_scan.objects.filter(status='intialized')
+        for task in schedualled_jobs:
+            if mac_add == task.target_mac:
+                context = "2," +  task.policy_name
+                return context
+        return "<< Normal heart beat - nothing to do >>"        

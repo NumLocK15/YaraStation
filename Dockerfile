@@ -31,5 +31,4 @@ RUN adduser --disabled-password --no-create-home app && \
 
 ENV PATH="/scripts:/py/bin:$PATH"
 
-
 CMD ["run.sh"]

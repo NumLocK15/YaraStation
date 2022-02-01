@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-
+ 
 import os
 from decouple import config
 from unipath import Path
@@ -41,6 +41,9 @@ INSTALLED_APPS = [
     'app',  # Enable the inner app 
     'yara_parser',
     'core',
+    'api',
+    'rest_framework',
+    'rest_framework.authtoken'
 ]
 
 MIDDLEWARE = [
@@ -59,6 +62,12 @@ INTERNAL_IPS = [
     '127.0.0.1',
     # ...
 ]
+
+REST_FRAMEWORK = {
+   'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+}
 
 ROOT_URLCONF = 'core.urls'
 LOGIN_REDIRECT_URL = "home"   # Route defined in app/urls.py

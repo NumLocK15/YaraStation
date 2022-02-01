@@ -1,5 +1,4 @@
 django>=2.2.24,<2.3.0
-psycopg2>=2.8.6,<2.9
 asgiref
 autopep8
 pycodestyle
@@ -12,3 +11,4 @@ gunicorn
 whitenoise
 python-dateutil
 pymysql
+djangorestframework

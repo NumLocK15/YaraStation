@@ -32,7 +32,7 @@ That is it :) .. Now you can access the portal on http://localhost
 
     #download the code
     git clone https://github.com/NumLocK15/yarastation/
-    cd  yara-station/app
+    cd  yarastation/app
     
     #setup the virtual environemt and download requirments
     sudo apt update
@@ -59,15 +59,45 @@ Notes:
 
 
 
+
+
+## Managing Agent installtion
+
+### Step (1): Generate the authorization token:   
+    
+    (On docker-compose installation)
+    # Run the following commands
+    docker exec -it yarastation_app_1 chmod +x generate_token_scripts/generate_token.sh
+    docker exec -it yarastation_app_1 generate_token_scripts/generate_token.sh
+    docker exec -it yarastation_app_1 cat /app/generate_token_scripts/agent_token.txt
+    # copy the generated token as it will be used in later stages. 
+
+### Step (2): install the agent:
+    (Option 1: running the agent as an executable.)
+    1) unzip the release version of the agent in a location of your choosing (PS: this will be your installation folder and it should not be moved)
+    2) Generate the config file (ys_config.txt) by running generate_config.ps1..
+    3) Run the executable using the command prompt and give the location of the config as an argument (example: yarastation_agent.exe "C:\ys_config.txt")
+    DONE!! now you can manage your system from the server.
+
+    (Option 2: running the agent as an service.) (Recomended)
+    1) unzip the release version of the agent in a location of your choosing (PS: this will be your installation folder and it should not be moved)
+    2) execute the powershell script "install_yarastation_agent.ps1" follow the commands then finish.
+    3) go to windows services, find yarastation and start the service. 
+    DONE!! now you can manage your system from the server.
+
+### Agent Archtecture:
+<p align="center">
+    <img src="app/core/static/assets/images/proccess1.png"/>
+</P>
+
 ## Disclaimer
 The portal is still in the earlly development phases, it is recommended to run it in a controlled environemnt that does not have internet access. 
 
-
 ## Roadmap
     1. (live) Provide support for Uploading/Parsing loki results
-    2. (Coming Soon - end of january) Provide support for managment agents to run scans from a centralized location
-    3. (Coming soon - still collecting data) Provide support for Uploading/Parsing results from different sources (e.g. Thor scanner, EDRs etc.)
-    
+    2. (live) Provide support for managment agents to run scans from a centralized location
+    3. (Coming soon - Testing phases) Agent Support for UNIX systems
+    4. (Coming soon - still collecting data) Provide support for Uploading/Parsing results from different sources (e.g. Thor scanner, EDRs etc.)
     
 ## Screenshots
 <p align="center">
@@ -75,5 +105,5 @@ The portal is still in the earlly development phases, it is recommended to run i
     <img src="app/core/static/assets/images/sc2.png"/>
     <img src="app/core/static/assets/images/sc3.jpg"/>
     <img src="app/core/static/assets/images/sc4.jpg"/>
-    <img src="app/core/static/assets/images/sc5.jpg"/>
+    <img src="app/core/static/assets/images/sc5.jpg"/>    
 </p>
