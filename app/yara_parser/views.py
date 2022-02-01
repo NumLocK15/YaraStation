@@ -702,6 +702,10 @@ def heart_beat (mac_add, ip_add, host_name, os, status):
         schedualled_jobs =  schedualled_scan.objects.filter(status='intialized')
         for task in schedualled_jobs:
             if mac_add == task.target_mac:
-                context = "2," +  task.policy_name
+                context = {
+                    'state' : "2",
+                    'policy_name' : task.policy_name,
+                    'upload_completed' : "N/A"
+                }
                 return context
-        return "<< Normal heart beat - nothing to do >>"        
+        return "<< Normal heart beat - nothing to do >>"       
