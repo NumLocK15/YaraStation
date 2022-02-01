@@ -1,0 +1,692 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "yarastation_agent/1.0.0": {
+        "dependencies": {
+          "Microsoft.Extensions.Hosting.WindowsServices": "6.0.2-mauipre.1.22054.8"
+        },
+        "runtime": {
+          "yarastation_agent.dll": {}
+        }
+      },
+      "Microsoft.Extensions.Configuration/6.0.2-mauipre.1.22054.8": {
+        "dependencies": {
+          "Microsoft.Extensions.Configuration.Abstractions": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.Primitives": "6.0.2-mauipre.1.22054.8"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Extensions.Configuration.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.222.5408"
+          }
+        }
+      },
+      "Microsoft.Extensions.Configuration.Abstractions/6.0.2-mauipre.1.22054.8": {
+        "dependencies": {
+          "Microsoft.Extensions.Primitives": "6.0.2-mauipre.1.22054.8"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Extensions.Configuration.Abstractions.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.222.5408"
+          }
+        }
+      },
+      "Microsoft.Extensions.Configuration.Binder/6.0.2-mauipre.1.22054.8": {
+        "dependencies": {
+          "Microsoft.Extensions.Configuration.Abstractions": "6.0.2-mauipre.1.22054.8"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Extensions.Configuration.Binder.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.222.5408"
+          }
+        }
+      },
+      "Microsoft.Extensions.Configuration.CommandLine/6.0.2-mauipre.1.22054.8": {
+        "dependencies": {
+          "Microsoft.Extensions.Configuration": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.Configuration.Abstractions": "6.0.2-mauipre.1.22054.8"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Extensions.Configuration.CommandLine.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.222.5408"
+          }
+        }
+      },
+      "Microsoft.Extensions.Configuration.EnvironmentVariables/6.0.2-mauipre.1.22054.8": {
+        "dependencies": {
+          "Microsoft.Extensions.Configuration": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.Configuration.Abstractions": "6.0.2-mauipre.1.22054.8"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Extensions.Configuration.EnvironmentVariables.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.222.5408"
+          }
+        }
+      },
+      "Microsoft.Extensions.Configuration.FileExtensions/6.0.2-mauipre.1.22054.8": {
+        "dependencies": {
+          "Microsoft.Extensions.Configuration": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.Configuration.Abstractions": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.FileProviders.Abstractions": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.FileProviders.Physical": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.Primitives": "6.0.2-mauipre.1.22054.8"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Extensions.Configuration.FileExtensions.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.222.5408"
+          }
+        }
+      },
+      "Microsoft.Extensions.Configuration.Json/6.0.2-mauipre.1.22054.8": {
+        "dependencies": {
+          "Microsoft.Extensions.Configuration": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.Configuration.Abstractions": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.Configuration.FileExtensions": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.FileProviders.Abstractions": "6.0.2-mauipre.1.22054.8",
+          "System.Text.Json": "6.0.2-mauipre.1.22054.8"
+        },
+        "runtime": {
+          "lib/netstandard2.1/Microsoft.Extensions.Configuration.Json.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.222.5408"
+          }
+        }
+      },
+      "Microsoft.Extensions.Configuration.UserSecrets/6.0.2-mauipre.1.22054.8": {
+        "dependencies": {
+          "Microsoft.Extensions.Configuration.Abstractions": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.Configuration.Json": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.FileProviders.Abstractions": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.FileProviders.Physical": "6.0.2-mauipre.1.22054.8"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Extensions.Configuration.UserSecrets.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.222.5408"
+          }
+        }
+      },
+      "Microsoft.Extensions.DependencyInjection/6.0.2-mauipre.1.22054.8": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.2-mauipre.1.22054.8",
+          "System.Runtime.CompilerServices.Unsafe": "6.0.2-mauipre.1.22054.8"
+        },
+        "runtime": {
+          "lib/net6.0/Microsoft.Extensions.DependencyInjection.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.222.5408"
+          }
+        }
+      },
+      "Microsoft.Extensions.DependencyInjection.Abstractions/6.0.2-mauipre.1.22054.8": {
+        "runtime": {
+          "lib/net6.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.222.5408"
+          }
+        }
+      },
+      "Microsoft.Extensions.FileProviders.Abstractions/6.0.2-mauipre.1.22054.8": {
+        "dependencies": {
+          "Microsoft.Extensions.Primitives": "6.0.2-mauipre.1.22054.8"
+        },
+        "runtime": {
+          "lib/net6.0/Microsoft.Extensions.FileProviders.Abstractions.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.222.5408"
+          }
+        }
+      },
+      "Microsoft.Extensions.FileProviders.Physical/6.0.2-mauipre.1.22054.8": {
+        "dependencies": {
+          "Microsoft.Extensions.FileProviders.Abstractions": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.FileSystemGlobbing": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.Primitives": "6.0.2-mauipre.1.22054.8"
+        },
+        "runtime": {
+          "lib/net6.0/Microsoft.Extensions.FileProviders.Physical.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.222.5408"
+          }
+        }
+      },
+      "Microsoft.Extensions.FileSystemGlobbing/6.0.2-mauipre.1.22054.8": {
+        "runtime": {
+          "lib/net6.0/Microsoft.Extensions.FileSystemGlobbing.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.222.5408"
+          }
+        }
+      },
+      "Microsoft.Extensions.Hosting/6.0.2-mauipre.1.22054.8": {
+        "dependencies": {
+          "Microsoft.Extensions.Configuration": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.Configuration.Abstractions": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.Configuration.Binder": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.Configuration.CommandLine": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.Configuration.EnvironmentVariables": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.Configuration.FileExtensions": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.Configuration.Json": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.Configuration.UserSecrets": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.DependencyInjection": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.FileProviders.Abstractions": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.FileProviders.Physical": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.Hosting.Abstractions": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.Logging": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.Logging.Abstractions": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.Logging.Configuration": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.Logging.Console": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.Logging.Debug": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.Logging.EventLog": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.Logging.EventSource": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.Options": "6.0.2-mauipre.1.22054.8"
+        },
+        "runtime": {
+          "lib/net6.0/Microsoft.Extensions.Hosting.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.222.5408"
+          }
+        }
+      },
+      "Microsoft.Extensions.Hosting.Abstractions/6.0.2-mauipre.1.22054.8": {
+        "dependencies": {
+          "Microsoft.Extensions.Configuration.Abstractions": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.FileProviders.Abstractions": "6.0.2-mauipre.1.22054.8"
+        },
+        "runtime": {
+          "lib/netstandard2.1/Microsoft.Extensions.Hosting.Abstractions.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.222.5408"
+          }
+        }
+      },
+      "Microsoft.Extensions.Hosting.WindowsServices/6.0.2-mauipre.1.22054.8": {
+        "dependencies": {
+          "Microsoft.Extensions.Hosting": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.Logging.EventLog": "6.0.2-mauipre.1.22054.8",
+          "System.ServiceProcess.ServiceController": "6.0.2-mauipre.1.22054.8"
+        },
+        "runtime": {
+          "lib/netstandard2.1/Microsoft.Extensions.Hosting.WindowsServices.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.222.5408"
+          }
+        }
+      },
+      "Microsoft.Extensions.Logging/6.0.2-mauipre.1.22054.8": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.Logging.Abstractions": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.Options": "6.0.2-mauipre.1.22054.8",
+          "System.Diagnostics.DiagnosticSource": "6.0.2-mauipre.1.22054.8"
+        },
+        "runtime": {
+          "lib/netstandard2.1/Microsoft.Extensions.Logging.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.222.5408"
+          }
+        }
+      },
+      "Microsoft.Extensions.Logging.Abstractions/6.0.2-mauipre.1.22054.8": {
+        "runtime": {
+          "lib/net6.0/Microsoft.Extensions.Logging.Abstractions.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.222.5408"
+          }
+        }
+      },
+      "Microsoft.Extensions.Logging.Configuration/6.0.2-mauipre.1.22054.8": {
+        "dependencies": {
+          "Microsoft.Extensions.Configuration": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.Configuration.Abstractions": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.Configuration.Binder": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.Logging": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.Logging.Abstractions": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.Options": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.Options.ConfigurationExtensions": "6.0.2-mauipre.1.22054.8"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Extensions.Logging.Configuration.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.222.5408"
+          }
+        }
+      },
+      "Microsoft.Extensions.Logging.Console/6.0.2-mauipre.1.22054.8": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.Logging": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.Logging.Abstractions": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.Logging.Configuration": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.Options": "6.0.2-mauipre.1.22054.8",
+          "System.Text.Json": "6.0.2-mauipre.1.22054.8"
+        },
+        "runtime": {
+          "lib/net6.0/Microsoft.Extensions.Logging.Console.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.222.5408"
+          }
+        }
+      },
+      "Microsoft.Extensions.Logging.Debug/6.0.2-mauipre.1.22054.8": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.Logging": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.Logging.Abstractions": "6.0.2-mauipre.1.22054.8"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Extensions.Logging.Debug.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.222.5408"
+          }
+        }
+      },
+      "Microsoft.Extensions.Logging.EventLog/6.0.2-mauipre.1.22054.8": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.Logging": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.Logging.Abstractions": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.Options": "6.0.2-mauipre.1.22054.8",
+          "System.Diagnostics.EventLog": "6.0.2-mauipre.1.22054.8"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Extensions.Logging.EventLog.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.222.5408"
+          }
+        }
+      },
+      "Microsoft.Extensions.Logging.EventSource/6.0.2-mauipre.1.22054.8": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.Logging": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.Logging.Abstractions": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.Options": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.Primitives": "6.0.2-mauipre.1.22054.8",
+          "System.Runtime.CompilerServices.Unsafe": "6.0.2-mauipre.1.22054.8",
+          "System.Text.Json": "6.0.2-mauipre.1.22054.8"
+        },
+        "runtime": {
+          "lib/net6.0/Microsoft.Extensions.Logging.EventSource.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.222.5408"
+          }
+        }
+      },
+      "Microsoft.Extensions.Options/6.0.2-mauipre.1.22054.8": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.Primitives": "6.0.2-mauipre.1.22054.8"
+        },
+        "runtime": {
+          "lib/netstandard2.1/Microsoft.Extensions.Options.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.222.5408"
+          }
+        }
+      },
+      "Microsoft.Extensions.Options.ConfigurationExtensions/6.0.2-mauipre.1.22054.8": {
+        "dependencies": {
+          "Microsoft.Extensions.Configuration.Abstractions": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.Configuration.Binder": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.Options": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.Primitives": "6.0.2-mauipre.1.22054.8"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Extensions.Options.ConfigurationExtensions.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.222.5408"
+          }
+        }
+      },
+      "Microsoft.Extensions.Primitives/6.0.2-mauipre.1.22054.8": {
+        "dependencies": {
+          "System.Runtime.CompilerServices.Unsafe": "6.0.2-mauipre.1.22054.8"
+        },
+        "runtime": {
+          "lib/net6.0/Microsoft.Extensions.Primitives.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.222.5408"
+          }
+        }
+      },
+      "System.Diagnostics.DiagnosticSource/6.0.2-mauipre.1.22054.8": {
+        "dependencies": {
+          "System.Runtime.CompilerServices.Unsafe": "6.0.2-mauipre.1.22054.8"
+        },
+        "runtime": {
+          "lib/net6.0/System.Diagnostics.DiagnosticSource.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.222.5408"
+          }
+        }
+      },
+      "System.Diagnostics.EventLog/6.0.2-mauipre.1.22054.8": {
+        "runtime": {
+          "lib/net6.0/System.Diagnostics.EventLog.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.222.5408"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/net6.0/System.Diagnostics.EventLog.Messages.dll": {
+            "rid": "win",
+            "assetType": "runtime",
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win/lib/net6.0/System.Diagnostics.EventLog.dll": {
+            "rid": "win",
+            "assetType": "runtime",
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.222.5408"
+          }
+        }
+      },
+      "System.Runtime.CompilerServices.Unsafe/6.0.2-mauipre.1.22054.8": {
+        "runtime": {
+          "lib/net6.0/System.Runtime.CompilerServices.Unsafe.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.222.5408"
+          }
+        }
+      },
+      "System.ServiceProcess.ServiceController/6.0.2-mauipre.1.22054.8": {
+        "dependencies": {
+          "System.Diagnostics.EventLog": "6.0.2-mauipre.1.22054.8"
+        },
+        "runtime": {
+          "lib/net6.0/System.ServiceProcess.ServiceController.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.222.5408"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/net6.0/System.ServiceProcess.ServiceController.dll": {
+            "rid": "win",
+            "assetType": "runtime",
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.222.5408"
+          }
+        }
+      },
+      "System.Text.Encodings.Web/6.0.2-mauipre.1.22054.8": {
+        "dependencies": {
+          "System.Runtime.CompilerServices.Unsafe": "6.0.2-mauipre.1.22054.8"
+        },
+        "runtime": {
+          "lib/net6.0/System.Text.Encodings.Web.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.222.5408"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/browser/lib/net6.0/System.Text.Encodings.Web.dll": {
+            "rid": "browser",
+            "assetType": "runtime",
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.222.5408"
+          }
+        }
+      },
+      "System.Text.Json/6.0.2-mauipre.1.22054.8": {
+        "dependencies": {
+          "System.Runtime.CompilerServices.Unsafe": "6.0.2-mauipre.1.22054.8",
+          "System.Text.Encodings.Web": "6.0.2-mauipre.1.22054.8"
+        },
+        "runtime": {
+          "lib/net6.0/System.Text.Json.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.222.5408"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "yarastation_agent/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.Extensions.Configuration/6.0.2-mauipre.1.22054.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-r31wRMI9ceMihv6FAQ0LPl7JI8JvoOnPjhu2kB2/jBekfF7Yxl7zd4dvaCoXJVwtRQujEyoh2my4OtviBmbGGg==",
+      "path": "microsoft.extensions.configuration/6.0.2-mauipre.1.22054.8",
+      "hashPath": "microsoft.extensions.configuration.6.0.2-mauipre.1.22054.8.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Configuration.Abstractions/6.0.2-mauipre.1.22054.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-pkCZm4uUT46AOct3trvxYkh/L7wKsnFZZXsJXlM36rf6CHboXeENanOBN7chxDUKvA2a8Ejx9ojOE7FPHmoi4A==",
+      "path": "microsoft.extensions.configuration.abstractions/6.0.2-mauipre.1.22054.8",
+      "hashPath": "microsoft.extensions.configuration.abstractions.6.0.2-mauipre.1.22054.8.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Configuration.Binder/6.0.2-mauipre.1.22054.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-SpipikruG3PE6sk5xn/fh54o2cuMkWlQbHhoixG424/kyPLdsgjN1sRm6Vmo5E+MRckR9+k+2gysGj+aLu0Bwg==",
+      "path": "microsoft.extensions.configuration.binder/6.0.2-mauipre.1.22054.8",
+      "hashPath": "microsoft.extensions.configuration.binder.6.0.2-mauipre.1.22054.8.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Configuration.CommandLine/6.0.2-mauipre.1.22054.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-9qg07l3Ev4R6VFVZ5pfZ9tznXY7FaPPT8+7XmMiB12VLnBoHtWp+pSNFY/K6wumpOr3T+szJGJiK86aVBv1Y2A==",
+      "path": "microsoft.extensions.configuration.commandline/6.0.2-mauipre.1.22054.8",
+      "hashPath": "microsoft.extensions.configuration.commandline.6.0.2-mauipre.1.22054.8.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Configuration.EnvironmentVariables/6.0.2-mauipre.1.22054.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-CiEny664+9WztL3QHQ3ZR3sL9Qyl3BdMoBK4f/uCM/KagoZpOPsE7PGMM9k7n2bx/RzwgBlmjgLdltRDtKeDyA==",
+      "path": "microsoft.extensions.configuration.environmentvariables/6.0.2-mauipre.1.22054.8",
+      "hashPath": "microsoft.extensions.configuration.environmentvariables.6.0.2-mauipre.1.22054.8.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Configuration.FileExtensions/6.0.2-mauipre.1.22054.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-egKcPtcph4hvZC+Oe/G1gwDd9t/vp0VqvZsvj0RlnaemXkFpEfHQ0cCwKe1YUmhIn+1CAzwB7qxIgjMF++jb5w==",
+      "path": "microsoft.extensions.configuration.fileextensions/6.0.2-mauipre.1.22054.8",
+      "hashPath": "microsoft.extensions.configuration.fileextensions.6.0.2-mauipre.1.22054.8.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Configuration.Json/6.0.2-mauipre.1.22054.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-5hTaVkqHfCqfnMCHF4gj6wyzcnUAs9TgGYqITjxDQYGonlC3Li2vd+Iaw6CsDHTd7PErHtUotbfJhF1UxEUcTg==",
+      "path": "microsoft.extensions.configuration.json/6.0.2-mauipre.1.22054.8",
+      "hashPath": "microsoft.extensions.configuration.json.6.0.2-mauipre.1.22054.8.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Configuration.UserSecrets/6.0.2-mauipre.1.22054.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-7cnsgoGnQYbwRBIFJecD6VIJvoN/4MgaDy8hpZTyiN/zdBTcyFhRmKB+as3x7MYG94E1XdlHZle6d1rEAu/YrQ==",
+      "path": "microsoft.extensions.configuration.usersecrets/6.0.2-mauipre.1.22054.8",
+      "hashPath": "microsoft.extensions.configuration.usersecrets.6.0.2-mauipre.1.22054.8.nupkg.sha512"
+    },
+    "Microsoft.Extensions.DependencyInjection/6.0.2-mauipre.1.22054.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Mq9h3HkBMSl1h3wWKvMkU/yuYvn0gaf15Fslvp2g87qRzgJLjTb4ItczX6TZOa9M7IcBNoBNgbKY2EdGZyj4TQ==",
+      "path": "microsoft.extensions.dependencyinjection/6.0.2-mauipre.1.22054.8",
+      "hashPath": "microsoft.extensions.dependencyinjection.6.0.2-mauipre.1.22054.8.nupkg.sha512"
+    },
+    "Microsoft.Extensions.DependencyInjection.Abstractions/6.0.2-mauipre.1.22054.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-8XFtUtvSvsxB/mwebHvO+mrH3Iuk0w/rHu+7juHTfsYv9mtZkS3U3NY8zP25czF6L41HlbrfWeF/u4npFByq1w==",
+      "path": "microsoft.extensions.dependencyinjection.abstractions/6.0.2-mauipre.1.22054.8",
+      "hashPath": "microsoft.extensions.dependencyinjection.abstractions.6.0.2-mauipre.1.22054.8.nupkg.sha512"
+    },
+    "Microsoft.Extensions.FileProviders.Abstractions/6.0.2-mauipre.1.22054.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-SwMOEGD9lCeyz9MsgATALIgMDd2qzonGdbdYZBl/ItgyvpfoibSLi/HmRDE4w/AGCb8BMJRhlTdwYzpoCmJTpw==",
+      "path": "microsoft.extensions.fileproviders.abstractions/6.0.2-mauipre.1.22054.8",
+      "hashPath": "microsoft.extensions.fileproviders.abstractions.6.0.2-mauipre.1.22054.8.nupkg.sha512"
+    },
+    "Microsoft.Extensions.FileProviders.Physical/6.0.2-mauipre.1.22054.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-+tSOpKQmC1RyXYZV3q2NJxYVV6D3EV8MNX9VQaoi2xpcfiQZ9st6QWQby0XM9Ivrsw69ZC8tmiTPYB8LrqC6Ww==",
+      "path": "microsoft.extensions.fileproviders.physical/6.0.2-mauipre.1.22054.8",
+      "hashPath": "microsoft.extensions.fileproviders.physical.6.0.2-mauipre.1.22054.8.nupkg.sha512"
+    },
+    "Microsoft.Extensions.FileSystemGlobbing/6.0.2-mauipre.1.22054.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-BbWIisgkZn8oucvygfCHhViAlmPZJ1HXgZt5q6uqu0Yz1shi9o7jNa5NtFEzzx+iomx6hTk1j/jpHH7KW+5qXA==",
+      "path": "microsoft.extensions.filesystemglobbing/6.0.2-mauipre.1.22054.8",
+      "hashPath": "microsoft.extensions.filesystemglobbing.6.0.2-mauipre.1.22054.8.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Hosting/6.0.2-mauipre.1.22054.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-b7Ms7krFX3OWlOu7NLpfhXFo7HdHZlTsWzXKoAfaWUCq+2cavPiA3vKR5TiKpzaUWEc+qifYO8tmSJMo/XRfsw==",
+      "path": "microsoft.extensions.hosting/6.0.2-mauipre.1.22054.8",
+      "hashPath": "microsoft.extensions.hosting.6.0.2-mauipre.1.22054.8.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Hosting.Abstractions/6.0.2-mauipre.1.22054.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-twwYTIkt/NQH+crrrnSGgjg+I1zU08Uyzp6O44KfzQ0dIcFhpYGT3HG+Khj7snzjtmDw1WF1aFWAPi+NYdv6Vg==",
+      "path": "microsoft.extensions.hosting.abstractions/6.0.2-mauipre.1.22054.8",
+      "hashPath": "microsoft.extensions.hosting.abstractions.6.0.2-mauipre.1.22054.8.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Hosting.WindowsServices/6.0.2-mauipre.1.22054.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-xdbxSVMji1DLjdam5pC0+MYkKrLH7OjDKP3KBTjp1OY2huxf48BEWfAMx/PE+ObufFJkntlrlwida7NYyJcapQ==",
+      "path": "microsoft.extensions.hosting.windowsservices/6.0.2-mauipre.1.22054.8",
+      "hashPath": "microsoft.extensions.hosting.windowsservices.6.0.2-mauipre.1.22054.8.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Logging/6.0.2-mauipre.1.22054.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-LHT1ID+gGHTteXK8ytbjxSjgaQJEb7jFxgxxAvZyHK6OiOeAGd8twSoTOCmfmc5oQ2EzfSS0OE0RusvdIW7blg==",
+      "path": "microsoft.extensions.logging/6.0.2-mauipre.1.22054.8",
+      "hashPath": "microsoft.extensions.logging.6.0.2-mauipre.1.22054.8.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Logging.Abstractions/6.0.2-mauipre.1.22054.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-dWsLeAdq7w4CSpxmee2/Czukxx9zJ+TK5D+nBF0/DEtqOE42NjQGVbJ+UUt0aFCxfJpxv4dt6mCDqIuE5hre5A==",
+      "path": "microsoft.extensions.logging.abstractions/6.0.2-mauipre.1.22054.8",
+      "hashPath": "microsoft.extensions.logging.abstractions.6.0.2-mauipre.1.22054.8.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Logging.Configuration/6.0.2-mauipre.1.22054.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-yE0Ejzf2hYC/oAji4hjvLbPMoyb/F5xuKTFYMeSnStS6zpcFQzfViciGsQIVpvsy7gftqwGEaU12MCSadGXcaQ==",
+      "path": "microsoft.extensions.logging.configuration/6.0.2-mauipre.1.22054.8",
+      "hashPath": "microsoft.extensions.logging.configuration.6.0.2-mauipre.1.22054.8.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Logging.Console/6.0.2-mauipre.1.22054.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-KliFBF8Dssg0sMBVo0M3UXtruJodUWD/HMju9LXycUAHorhd0fdDvo2IyVz+4JhGuMDQpZg4oyl1yFOYxkXEUA==",
+      "path": "microsoft.extensions.logging.console/6.0.2-mauipre.1.22054.8",
+      "hashPath": "microsoft.extensions.logging.console.6.0.2-mauipre.1.22054.8.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Logging.Debug/6.0.2-mauipre.1.22054.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-LUIlIgaIswOLewstHD1xvxZ1qTKCh/crKNSwIWQqAXzKOWbg/vzO/Su+D2HL/bAgahUgsum02Y+RFb9ZzI9zRg==",
+      "path": "microsoft.extensions.logging.debug/6.0.2-mauipre.1.22054.8",
+      "hashPath": "microsoft.extensions.logging.debug.6.0.2-mauipre.1.22054.8.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Logging.EventLog/6.0.2-mauipre.1.22054.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-dd5JjiCpkQJeEBupAQICf9Q3w5TMQHTnpRHnM+E8CqLBEqXWVuVUHWfwhIYsNTNcveYTv+Jf/J0Xhs8iR5UQQw==",
+      "path": "microsoft.extensions.logging.eventlog/6.0.2-mauipre.1.22054.8",
+      "hashPath": "microsoft.extensions.logging.eventlog.6.0.2-mauipre.1.22054.8.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Logging.EventSource/6.0.2-mauipre.1.22054.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Do4k4QRiChn4COckadDJXB39XC0owt4VhDk9HyYgqCb1qTJQ5BnNTvFy1/DUzBN6FJtWIcaDK2abAoIM2D01Zw==",
+      "path": "microsoft.extensions.logging.eventsource/6.0.2-mauipre.1.22054.8",
+      "hashPath": "microsoft.extensions.logging.eventsource.6.0.2-mauipre.1.22054.8.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Options/6.0.2-mauipre.1.22054.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-5OhJf4x+tu37UzJkv0Fu1wJoE5W3UsW8DSoNeSfo73W3KiI8KymIitOr/r/RN1AK0y69sD01l9u5kwqQm2T/og==",
+      "path": "microsoft.extensions.options/6.0.2-mauipre.1.22054.8",
+      "hashPath": "microsoft.extensions.options.6.0.2-mauipre.1.22054.8.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Options.ConfigurationExtensions/6.0.2-mauipre.1.22054.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-WQUCoV7VN14Hqh5eqpcaiZwnMINHY5bYcXtfMotH8HqMtIctQhOMloSw4DgwTAejxbYMktTRuqImFJSqk2UaEQ==",
+      "path": "microsoft.extensions.options.configurationextensions/6.0.2-mauipre.1.22054.8",
+      "hashPath": "microsoft.extensions.options.configurationextensions.6.0.2-mauipre.1.22054.8.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Primitives/6.0.2-mauipre.1.22054.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-lVtYpBd21BXlclaAX6rMoJIbjojo069vlqhKHxhQs9tVeHnHB7sVj91LchF9xAG0xDbUsFujy8xqOTELYuXm5w==",
+      "path": "microsoft.extensions.primitives/6.0.2-mauipre.1.22054.8",
+      "hashPath": "microsoft.extensions.primitives.6.0.2-mauipre.1.22054.8.nupkg.sha512"
+    },
+    "System.Diagnostics.DiagnosticSource/6.0.2-mauipre.1.22054.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-h/x34gS4wkGPY4Gk/Mloyi8s6wNYvLEP0h/FPSgbP64RG6y925gHVOhZ1LMMbtTjljQbIXI7QU/XsqSbmWCKIA==",
+      "path": "system.diagnostics.diagnosticsource/6.0.2-mauipre.1.22054.8",
+      "hashPath": "system.diagnostics.diagnosticsource.6.0.2-mauipre.1.22054.8.nupkg.sha512"
+    },
+    "System.Diagnostics.EventLog/6.0.2-mauipre.1.22054.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-lce7HNbWheowhQmjgxr/JN2RRPHx4Sk2aC/MbkT8A4aYH70NUV4karBRzhFCNDhkPdvZhFMoh8z09Ww4m+FZjQ==",
+      "path": "system.diagnostics.eventlog/6.0.2-mauipre.1.22054.8",
+      "hashPath": "system.diagnostics.eventlog.6.0.2-mauipre.1.22054.8.nupkg.sha512"
+    },
+    "System.Runtime.CompilerServices.Unsafe/6.0.2-mauipre.1.22054.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-/xD4/PF6icn6aQJQy43rg7SIa/VJ7OFlt5eQ7ceVpwW4fMVXWZC3F5jW5NkEee8XEpIq1mjE/KAi8xfSPP+9Ig==",
+      "path": "system.runtime.compilerservices.unsafe/6.0.2-mauipre.1.22054.8",
+      "hashPath": "system.runtime.compilerservices.unsafe.6.0.2-mauipre.1.22054.8.nupkg.sha512"
+    },
+    "System.ServiceProcess.ServiceController/6.0.2-mauipre.1.22054.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-FEVau6aDPwqjKD2PqF+ljUTAdajm5zR3gnL3FjG4SSzoDYoonGCqx7TviEup8mq48hq4JZ2EWMpmd7TD//R3/A==",
+      "path": "system.serviceprocess.servicecontroller/6.0.2-mauipre.1.22054.8",
+      "hashPath": "system.serviceprocess.servicecontroller.6.0.2-mauipre.1.22054.8.nupkg.sha512"
+    },
+    "System.Text.Encodings.Web/6.0.2-mauipre.1.22054.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-7UFDdgfSYnzMSk3irYYhBLLkJEfpENeRi2rPzWlEn4D6OIlTfg/FRXxhl8TdfGR2XvmKXYeIoIGiGn72SJhk1Q==",
+      "path": "system.text.encodings.web/6.0.2-mauipre.1.22054.8",
+      "hashPath": "system.text.encodings.web.6.0.2-mauipre.1.22054.8.nupkg.sha512"
+    },
+    "System.Text.Json/6.0.2-mauipre.1.22054.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-22clqJXfIB0IYFR1fgRyxCOSerglHTFOxvIqnlL8KtcxfLB1uWTZu78G2yADwLU9syDIMOEUg0VJO4FUodqnDA==",
+      "path": "system.text.json/6.0.2-mauipre.1.22054.8",
+      "hashPath": "system.text.json.6.0.2-mauipre.1.22054.8.nupkg.sha512"
+    }
+  }
+}

@@ -1,0 +1,9 @@
+mac_address:01-5C-21-22-31-CC
+hostname:SRV-TEST
+OS:Windows
+ip_add:10.10.10.10
+status:1
+ys_server:10.10.10.20
+token:9ae398a65e66d0e1b431222e76abb02e7974
+tempDownloadLocation=C:\temp
+entity:agent_upload

@@ -1,0 +1,9 @@
+﻿mac_address:123.123.123.123
+hostname:test.local 
+OS:windows
+ip_add:10.10.10.10
+status:1
+ys_server:206.81.29.239
+token:9ae398a65e66d0e1b431222e76abb02e7974a149
+tempDownloadLocation=L:\testingYara\
+loki:loki_0.44.2_3

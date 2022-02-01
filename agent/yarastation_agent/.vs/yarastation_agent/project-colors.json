@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "39d03c21-6356-4144-98ed-1716b951d0b6": {
+      "ProjectGuid": "39d03c21-6356-4144-98ed-1716b951d0b6",
+      "DisplayName": "yarastation_agent",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}
